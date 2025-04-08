@@ -6,12 +6,21 @@ public class Inventario {
     private Map<String, Componente> componentes;
     
     private Inventario() {
-        // Inicialización privada
+        componentes = new HashMap<>();
     }
     
     public static Inventario getInstance() {
-        // Implementación Singleton
+        if (instance == null){
+            instance = new Inventario();
+        }
+        return instance;
     }
     
-    // Métodos para manejar el inventario
+    public void agregarComponente(Componente componente) {
+        componentes.put(componente.getNombre(), componente);
+    }
+
+    public Componente obtenerComponente(String nombre) {
+        return componentes.get(nombre);
+    }
 }

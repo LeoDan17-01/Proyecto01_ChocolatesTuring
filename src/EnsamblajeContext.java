@@ -57,22 +57,33 @@ public class EnsamblajeContext {
      * Método para verificar la compatibilidad de los componentes antes del
      * ensamblaje.
      */
-    public boolean verificarCompatibilidad(){
+    //public boolean verificarCompatibilidad(){
         //
-        return true;
+      //  return true;
 
-    }
+    //}
 
     /**
      * Método para realizar el ensamblaje de la computadora
      */
     public void ensamblarComputadora(){
-        if(verificarCompatibilidad()){
-            Computadora computadora = builder.build();
-            System.out.println("La computadora ha sido ensamblada correctamente. ");
-        } else{
-            System.out.println("Los componentes no son compatibles, no se puede ensamblar la computadora.");
+       
+        CPU cpu = builder.getCpu();
+        GPU gpu = builder.getGpu();
+        
+        // Verificación superficial de compatibilidad (solo mensaje, como dijo el profe)
+        if (cpu instanceof AMDCPU && gpu instanceof NvidiaGPU) {
+            System.out.println(" Advertencia: El CPU AMD y la GPU Nvidia podrían no ser compatibles.");
         }
+        
+        Computadora computadora = builder.build();
+        System.out.println("Computadora ensamblada exitosamente.");
+        
+        if (esPrearmado) {
+            System.out.println("Ensamblaje pre-armado completo.");
+        } else {
+            System.out.println(" Ensamblaje personalizado completado.");
+        }  
     }
 
     //Cambiar el estado de ensamblaje
@@ -100,5 +111,21 @@ public class EnsamblajeContext {
         return builder.build();
     }
     
+    /**
+     * Metodo para la computadora prearmada.
+     */
+
+     public void manejarPrearmado(){
+        System.out.println("Has seleccionado la opción de computadora pre-armada, componentes predeterminados.");
+        builder.agregarCPU(new IntelCPU("Core i5-13600K", 2500, "Intel", 6));
+        builder.agregarRAM(new RAM("Corsair Vengeance 16GB", 100, "Corsair", 16));
+        builder.agregarGPU(new NvidiaGPU("RTX 3060", 3500, "NVIDIA", "GDDR6"));
+        builder.agregarDisco(new Disco("Samsung SSD 500GB", 600, "Samsung"));
+        builder.agregarFuentePoder(new FuentePoder("EVGA 600W", 80, "EVGA"));
+        builder.agregarMotherboard(new Motherboard("Asus Z590", 300, "Asus"));
+        builder.agregarGabinete(new Gabinete("NZXT H510", 70, "NZXT"));
+
+        ensamblarComputadora();
+     }
 
 }

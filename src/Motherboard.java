@@ -1,24 +1,24 @@
-public abstract class GPU {
+public abstract class Motherboard {
     protected String nombre;
     protected double precio;
     protected String marca;
-    protected String tipoMemoria;
-    protected int vramGB;
+    protected String chipset;
+    protected String tipoSocket;
 
-    public GPU(String nombre, double precio, String marca, String tipoMemoria, int vramGB) {
+    public Motherboard(String nombre, double precio, String marca, String chipset, String tipoSocket) {
         this.nombre = nombre;
         this.precio = precio;
         this.marca = marca;
-        this.tipoMemoria = tipoMemoria;
-        this.vramGB = vramGB;
+        this.chipset = chipset;
+        this.tipoSocket = tipoSocket;
     }
 
     // Getters
     public String getNombre() { return nombre; }
     public double getPrecio() { return precio; }
     public String getMarca() { return marca; }
-    public String getTipoMemoria() { return tipoMemoria; }
-    public int getVramGB() { return vramGB; }
+    public String getChipset() { return chipset; }
+    public String getTipoSocket() { return tipoSocket; }
 
     public abstract String getDescripcion();
 }

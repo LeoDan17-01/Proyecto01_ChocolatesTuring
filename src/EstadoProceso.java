@@ -1,35 +1,25 @@
 public class EstadoProceso implements EstadoEnvio {
-
-    /**
-     * Clase que representa un estado específico de un pedido.
-     */
-    private String descripcionEstado;
-
-    public EstadoProceso(){
-        this.descripcionEstado = "En proceso";
-    }
-
-    /**
-     * Método que cambia el estado el pedido dependiendo su estado actual.
-     */
     @Override
     public void procesarEstado(Pedido pedido) {
         if (pedido != null) {
-          // Aquí el pedido pasa del estado "En proceso" a "En ensamblaje"
-          System.out.println("El pedido " + pedido.getIdPedido() + " está en proceso.");
-          pedido.setEstadoActual(new EstadoEnsamblaje());  // Cambiar a "En ensamblaje"
+            System.out.println("Procesando pedido " + pedido.getIdPedido() + 
+                             " en sucursal: " + pedido.getSucursal());
+            
+            if (!pedido.getSucursal().equals("CDMX")) {
+                System.out.println("Derivando a CDMX para ensamblaje");
+            }
+            
+            avanzarEstado(pedido, new EstadoEnsamblaje());
         }
     }
 
-
     @Override
     public String getDescripcionEstado() {
-        return this.descripcionEstado;
+        return "En proceso de preparación";
     }
 
     @Override
     public String getInstruccionesSeguimiento() {
-        return "El pedido está en proceso de ensamblaje.";
+        return "El pedido está siendo verificado y preparado para ensamblaje";
     }
-    
 }

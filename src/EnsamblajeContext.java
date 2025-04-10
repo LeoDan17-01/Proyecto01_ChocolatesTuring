@@ -1,131 +1,111 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Contexto principal para el proceso de ensamblaje de computadoras
+ * Controla el flujo de estados y mantiene los componentes seleccionados
+ */
 public class EnsamblajeContext {
-    private EnsamblajeState state;
+    private EnsamblajeEstado estado;
     private ComputadoraBuilder builder;
     private boolean esPrearmado;
-    private ComponenteFactory currentFactory;
-    
-    public EnsamblajeContext(){
-        this.state = new SeleccionTipoEstado();
-        this.builder = new ComputadoraBuilder();
-        this.esPrearmado = false;
-    }
-
-    //public void setState(EnsamblajeEstado state){
-      //  this.state = state;
-    //}
+    private String sucursalActual;
+    private String direccionEntrega;
+    private List<SoftwareAdicional> softwareAdicional;
 
     /**
-     * Método que porcesa el estado actual.
+     * Constructor inicializa el contexto con estado inicial
      */
-    //public void procesar(){
-      //  this.state.procesar(this); 
-
-    //}
-    //Métodos para manejar la configuracion de la computadora y el ensamblaje
-    public void agregarCPU (CPU cpu){
-        builder.agregaarCPU(cpu);
+    public EnsamblajeContext(String sucursalActual) {
+        this.estado = new SeleccionTipoEstado();
+        this.builder = new ComputadoraBuilder();
+        this.sucursalActual = sucursalActual;
+        this.softwareAdicional = new ArrayList<>();
     }
 
-    public void agregarRAM(RAM ram){
+    /**
+     * Procesa el estado actual del ensamblaje
+     */
+    public void procesar() {
+        estado.procesar(this);
+    }
+
+    /**
+     * Maneja la configuración prearmada
+     */
+    public void manejarPrearmado() {
+        if (esPrearmado) {
+            ComponenteFactory factory = new IntelNvidiaFactory();
+            builder.agregarCPU(factory.crearCPU("i5-13600K"))
+                  .agregarRAM(factory.crearRAM("16GB", 1))
+                  .agregarGPU(factory.crearGPU("RTX 3060"))
+                  .agregarDisco(factory.crearDisco("500GB"))
+                  .agregarFuentePoder(factory.crearFuentePoder("600W"));
+        }
+    }
+
+    // Métodos para agregar componentes
+    public void agregarCPU(CPU cpu) {
+        builder.agregarCPU(cpu);
+    }
+
+    public void agregarRAM(RAM ram) {
         builder.agregarRAM(ram);
     }
 
-    public void agregarGPU(GPU gpu){
-        builder.agregarGPU(gpu);
-    }
-    public void agregarDisco(Disco disco) {
-        builder.agregarDisco(disco);
-    }
-
-    public void agregarFuentePoder(FuentePoder fuente) {
-        builder.agregarFuentePoder(fuente);
-    }
-
-    public void agregarMotherboard(Motherboard motherboard) {
-        builder.agregarMotherboard(motherboard);
-    }
-
-    public void agregarGabinete(Gabinete gabinete) {
-        builder.agregarGabinete(gabinete);
-    }
-
     public void agregarSoftware(SoftwareAdicional software) {
-        builder.agregarSoftware(software);
-    }
-
-    /**
-     * Método para verificar la compatibilidad de los componentes antes del
-     * ensamblaje.
-     */
-    //public boolean verificarCompatibilidad(){
-        //
-      //  return true;
-
-    //}
-
-    /**
-     * Método para realizar el ensamblaje de la computadora
-     */
-    public void ensamblarComputadora(){
-       
-        CPU cpu = builder.getCpu();
-        GPU gpu = builder.getGpu();
-        
-        // Verificación superficial de compatibilidad (solo mensaje, como dijo el profe)
-        if (cpu instanceof AMDCPU && gpu instanceof NvidiaGPU) {
-            System.out.println(" Advertencia: El CPU AMD y la GPU Nvidia podrían no ser compatibles.");
+        if (!softwareAdicional.contains(software)) {
+            softwareAdicional.add(software);
         }
-        
-        Computadora computadora = builder.build();
-        System.out.println("Computadora ensamblada exitosamente.");
-        
-        if (esPrearmado) {
-            System.out.println("Ensamblaje pre-armado completo.");
-        } else {
-            System.out.println(" Ensamblaje personalizado completado.");
-        }  
     }
 
-    //Cambiar el estado de ensamblaje
-    public void setState(EnsamblajeEstado state ){
-        this.state = state;
+    // Getters y Setters
+    public ComputadoraBuilder getBuilder() {
+        return builder;
     }
 
-    //Ejecutar el procesamiento del ensamblaje
-    public void procesar(){
-        this.state.procesar(this);
-    }
-
-    //Método para acceder el atributo esPrearmado
-    public boolean esPrearmado(){
+    public boolean esPrearmado() {
         return esPrearmado;
     }
 
-    //Método para cambiar el valor de esPrearmado
-    public void setPrearmado(boolean esPrearmado){
+    public void setPrearmado(boolean esPrearmado) {
         this.esPrearmado = esPrearmado;
     }
 
-    //Metodos adicionales para obtener los componentes si es necesario
-    public Computadora getComputadora(){
-        return builder.build();
+    public EnsamblajeEstado getEstado() {
+        return estado;
     }
-    
+
+    public void setState(EnsamblajeEstado estado) {
+        this.estado = estado;
+    }
+
+    public String getSucursalActual() {
+        return sucursalActual;
+    }
+
+    public String getDireccionEntrega() {
+        return direccionEntrega;
+    }
+
+    public void setDireccionEntrega(String direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
+    }
+
+    public List<SoftwareAdicional> getSoftwareAdicional() {
+        return softwareAdicional;
+    }
+
     /**
-     * Metodo para la computadora prearmada.
+     * Crea un nuevo pedido con la configuración actual
      */
+    public Pedido crearPedido() {
+        Computadora computadora = builder.build();
+        computadora.setSoftware(softwareAdicional);
+        return new Pedido(generarIdPedido(), sucursalActual, direccionEntrega, computadora);
+    }
 
-     public void manejarPrearmado(){
-        System.out.println("Has seleccionado la opción de computadora pre-armada, componentes predeterminados.");
-        builder.agregarCPU(new IntelCPU("Core i5-13600K", 2500, "Intel", 6));
-        builder.agregarRAM(new RAM("Corsair Vengeance 16GB", 100, "Corsair", 16));
-        builder.agregarGPU(new NvidiaGPU("RTX 3060", 3500, "NVIDIA", "GDDR6"));
-        builder.agregarDisco(new Disco("Samsung SSD 500GB", 600, "Samsung"));
-        builder.agregarFuentePoder(new FuentePoder("EVGA 600W", 80, "EVGA"));
-        builder.agregarMotherboard(new Motherboard("Asus Z590", 300, "Asus"));
-        builder.agregarGabinete(new Gabinete("NZXT H510", 70, "NZXT"));
-
-        ensamblarComputadora();
-     }
-
+    private String generarIdPedido() {
+        return "PED-" + System.currentTimeMillis();
+    }
 }

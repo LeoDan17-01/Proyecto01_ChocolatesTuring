@@ -12,7 +12,12 @@ public abstract class CPU{
         this.numNucleos = numNucleos;
     }
 
-    //Agregar getters porfa
+    public String getNombre() { return nombre; }
+    public double getPrecio() { return precio; }
+    public String getMarca() { return marca; }
+    public int getNumNucleos() { return numNucleos; }
+
+    
 
     public abstract String getDescripcion();
 

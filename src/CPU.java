@@ -7,7 +7,7 @@ public abstract class CPU{
 
     public CPU(String nombre, double precio, String marca, int numNucleos){
         this.nombre = nombre;
-        this.precio = precio
+        this.precio = precio;
         this.marca = marca;
         this.numNucleos = numNucleos;
     }

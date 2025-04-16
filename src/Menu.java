@@ -52,7 +52,7 @@ public class Menu {
                     mostrarResumenPedido(); // Muestra los pedidos realizados
                     break;
                 case 4:
-                    seguir = false; // Termina el programa
+                    seguirComprando = false; // Termina el programa
                     break;
                 default:
                     System.out.println("Opción inválida. Intenta de nuevo.");

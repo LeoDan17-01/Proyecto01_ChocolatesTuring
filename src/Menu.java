@@ -14,252 +14,209 @@ public class Menu {
         inicializarMenu();
     }
 
-    /**
-     * Método que inicializa el menú y gestiona la interacción con el usuario.
-     */
     private void inicializarMenu() {
-        boolean seguirComprando= true;
+        boolean seguirComprando = true;
         System.out.println("-----------------------------------------------------------");
-        System.out.println("-----------------------------------------------------------");
-        System.out.println("                    PC's MonosChinos MX");
-        System.out.println("-----------------------------------------------------------");
+        System.out.println("                PC Builder - Ensamblaje de Computadoras");
         System.out.println("-----------------------------------------------------------\n");
 
         while (seguirComprando) {
-            System.out.println("\nBienvenido a MonosChinos MX");
-            System.out.println("Por favor, seleccione alguna de las siguientes opciones o elija salir:");
+            System.out.println("\nMenú Principal:");
             System.out.println("1. Comprar PC prearmada");
             System.out.println("2. Armar PC personalizada");
             System.out.println("3. Ver resumen de pedidos");
             System.out.println("4. Salir");
-            System.out.print("Elige una opción: ");
+            System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
-            scanner.nextLine(); // limpiar buffer
+            scanner.nextLine(); // Limpiar buffer
 
             switch (opcion) {
                 case 1:
-                    ensamblaje.manejarPrearmado(); // Configura la PC prearmada
+                    ensamblaje.manejarPrearmado();
                     flujoFinal();
                     break;
                 case 2:
-                    ensamblaje.iniciarPersonalizado(); // Inicia el ensamblaje personalizado
+                    ensamblaje.iniciarPersonalizado();
                     seleccionarComponentes();
                     agregarSoftwareOpcional();
                     flujoFinal();
                     break;
                 case 3:
-                    mostrarResumenPedido(); // Muestra los pedidos realizados
+                    mostrarResumenPedido();
                     break;
                 case 4:
-                    seguirComprando = false; // Termina el programa
+                    seguirComprando = false;
+                    System.out.println("Gracias por usar nuestro sistema. ¡Hasta pronto!");
                     break;
                 default:
-                    System.out.println("Opción inválida. Intenta de nuevo.");
+                    System.out.println("Opción inválida. Intente de nuevo.");
             }
         }
     }
 
-    /**
-     * Método que permite al usuario seleccionar los componentes de su PC personalizada.
-     */
     private void seleccionarComponentes() {
-        System.out.println("\n--- Selección de componentes ---");
+        System.out.println("\n--- Selección de Componentes ---");
 
-        // Selección de CPU
-        System.out.println("Selecciona una CPU:");
-        System.out.println("1. Intel Core i5-13600K\n2. Intel Core i7-13700K\n3. Intel Core i9-13900K");
+        // CPU
+        System.out.println("\n[CPU] Seleccione el procesador:");
+        System.out.println("1. Intel Core i5-13600K (6 núcleos) - $2500");
+        System.out.println("2. Intel Core i7-13700K (8 núcleos) - $3500");
+        System.out.println("3. Intel Core i9-13900K (12 núcleos) - $5000");
+        System.out.print("Opción: ");
         int opcionCPU = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
-        CPU cpu = null;
-        switch (opcionCPU) {
-            case 1:
-                cpu = new IntelCPU("Intel Core i5-13600K", 4500.0, "Intel", 14);
-                break;
-            case 2:
-                cpu = new IntelCPU("Intel Core i7-13700K", 5500.0, "Intel", 16);
-                break;
-            case 3:
-                cpu = new IntelCPU("Intel Core i9-13900K", 6500.0, "Intel", 18);
-                break;
-            default:
-                System.out.println("Opción no válida.");
-                return;
-        }
+        CPU cpu = switch (opcionCPU) {
+            case 1 -> new IntelCPU("Core i5-13600K", 2500, 6, "LGA1700");
+            case 2 -> new IntelCPU("Core i7-13700K", 3500, 8, "LGA1700");
+            case 3 -> new IntelCPU("Core i9-13900K", 5000, 12, "LGA1700");
+            default -> throw new IllegalArgumentException("Opción inválida");
+        };
         ensamblaje.agregarCPU(cpu);
 
-        // Selección de RAM
-        System.out.println("Selecciona una RAM:");
-        System.out.println("1. Kingston 16GB\n2. Kingston 32GB");
+        // RAM
+        System.out.println("\n[RAM] Seleccione la memoria:");
+        System.out.println("1. ADATA 16GB DDR4 3200MHz - $100");
+        System.out.println("2. ADATA 32GB DDR4 3200MHz - $180");
+        System.out.print("Opción: ");
         int opcionRAM = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
-        RAM ram = null;
-        switch (opcionRAM) {
-            case 1:
-                ram = new RAM("Kingston 16GB", "Kingston", 1200.0, "RAM", 16);
-                break;
-            case 2:
-                ram = new RAM("Kingston 32GB", "Kingston", 2000.0, "RAM", 32);
-                break;
-            default:
-                System.out.println("Opción no válida.");
-                return;
-        }
+        RAM ram = switch (opcionRAM) {
+            case 1 -> new AdataRAM("ADATA 16GB", 100, 16, "DDR4", 3200);
+            case 2 -> new AdataRAM("ADATA 32GB", 180, 32, "DDR4", 3200);
+            default -> throw new IllegalArgumentException("Opción inválida");
+        };
         ensamblaje.agregarRAM(ram);
 
-        // Selección de GPU
-        System.out.println("Selecciona una GPU:");
-        System.out.println("1. NVIDIA RTX 3060\n2. NVIDIA RTX 4080");
+        // GPU
+        System.out.println("\n[GPU] Seleccione la tarjeta gráfica:");
+        System.out.println("1. NVIDIA RTX 3060 12GB - $6000");
+        System.out.println("2. NVIDIA RTX 4080 16GB - $12000");
+        System.out.print("Opción: ");
         int opcionGPU = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
-        GPU gpu = null;
-        switch (opcionGPU) {
-            case 1:
-                gpu = new GPU("RTX 3060", 7000.0, "NVIDIA", "GDDR6", 12);
-                break;
-            case 2:
-                gpu = new GPU("RTX 4080", 12000.0, "NVIDIA", "GDDR6X", 16);
-                break;
-            default:
-                System.out.println("Opción no válida.");
-                return;
-        }
+        GPU gpu = switch (opcionGPU) {
+            case 1 -> new NvidiaGPU("RTX 3060", 6000, "GDDR6", 12);
+            case 2 -> new NvidiaGPU("RTX 4080", 12000, "GDDR6X", 16);
+            default -> throw new IllegalArgumentException("Opción inválida");
+        };
         ensamblaje.agregarGPU(gpu);
 
-        // Selección de Disco
-        System.out.println("Selecciona un disco:");
-        System.out.println("1. HDD 1TB\n2. SSD 1TB");
+        // Disco
+        System.out.println("\n[Almacenamiento] Seleccione el disco:");
+        System.out.println("1. SSD Samsung 500GB NVMe - $60");
+        System.out.println("2. SSD Samsung 1TB NVMe - $100");
+        System.out.print("Opción: ");
         int opcionDisco = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
-        Disco disco = null;
-        switch (opcionDisco) {
-            case 1:
-                disco = new HDD("HDD 1TB", 1000.0, "Seagate", 1000, 7200);
-                break;
-            case 2:
-                disco = new Disco("SSD 1TB", 1800.0, "Kingston", 1000, "SSD");
-                break;
-            default:
-                System.out.println("Opción no válida.");
-                return;
-        }
+        Disco disco = switch (opcionDisco) {
+            case 1 -> new SSD("Samsung 500GB", 60, "Samsung", 500, "NVMe");
+            case 2 -> new SSD("Samsung 1TB", 100, "Samsung", 1000, "NVMe");
+            default -> throw new IllegalArgumentException("Opción inválida");
+        };
         ensamblaje.agregarDisco(disco);
 
-        // Selección de Fuente de Poder
-        System.out.println("Selecciona una Fuente de Poder:");
-        System.out.println("1. Corsair 800W\n2. Corsair 1200W");
+        // Fuente
+        System.out.println("\n[Fuente] Seleccione la fuente de poder:");
+        System.out.println("1. EVGA 600W 80+ Bronze - $50");
+        System.out.println("2. Corsair 750W 80+ Gold - $80");
+        System.out.print("Opción: ");
         int opcionFuente = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
-        FuentePoder fuente = null;
-        switch (opcionFuente) {
-            case 1:
-                fuente = new FuentePoder("Corsair 800W", "Corsair", 1100.0, "Fuente", 800);
-                break;
-            case 2:
-                fuente = new FuentePoder("Corsair 1200W", "Corsair", 1500.0, "Fuente", 1200);
-                break;
-            default:
-                System.out.println("Opción no válida.");
-                return;
-        }
+        FuentePoder fuente = switch (opcionFuente) {
+            case 1 -> new EVGAFuentePoder("EVGA 600W", 50, 600, "80+ Bronze");
+            case 2 -> new EVGAFuentePoder("Corsair 750W", 80, 750, "80+ Gold");
+            default -> throw new IllegalArgumentException("Opción inválida");
+        };
         ensamblaje.agregarFuentePoder(fuente);
 
-        // Selección de Motherboard
-        System.out.println("Selecciona una Motherboard:");
-        System.out.println("1. ASUS Z590\n2. ASUS Z790");
-        int opcionMotherboard = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
-        Motherboard motherboard = null;
-        switch (opcionMotherboard) {
-            case 1:
-                motherboard = new Motherboard("ASUS Z590", "ASUS", 3000.0, "Motherboard", "Z590");
-                break;
-            case 2:
-                motherboard = new Motherboard("ASUS Z790", "ASUS", 3500.0, "Motherboard", "Z790");
-                break;
-            default:
-                System.out.println("Opción no válida.");
-                return;
-        }
-        ensamblaje.agregarMotherboard(motherboard);
+        // Motherboard
+        System.out.println("\n[Motherboard] Seleccione la placa base:");
+        System.out.println("1. ASUS Z590 (Intel) - $250");
+        System.out.println("2. ASUS B550 (AMD) - $150");
+        System.out.print("Opción: ");
+        int opcionMB = scanner.nextInt();
+        Motherboard mb = switch (opcionMB) {
+            case 1 -> new ASUSMotherboard("ASUS Z590", 250, "Z590", "LGA1200");
+            case 2 -> new ASUSMotherboard("ASUS B550", 150, "B550", "AM4");
+            default -> throw new IllegalArgumentException("Opción inválida");
+        };
+        ensamblaje.agregarMotherboard(mb);
 
-        // Selección de Gabinete
-        System.out.println("Selecciona un Gabinete:");
-        System.out.println("1. NZXT H510\n2. Yeyian Lancer");
+        // Gabinete
+        System.out.println("\n[Gabinete] Seleccione el chasis:");
+        System.out.println("1. NZXT H510 - $70");
+        System.out.println("2. Lian Li O11 Dynamic - $150");
+        System.out.print("Opción: ");
         int opcionGabinete = scanner.nextInt();
-        scanner.nextLine(); // limpiar buffer
-        Gabinete gabinete = null;
-        switch (opcionGabinete) {
-            case 1:
-                gabinete = new Gabinete("NZXT H510", "NZXT", 1500.0, "Gabinete");
-                break;
-            case 2:
-                gabinete = new Gabinete("Yeyian Lancer", "Yeyian", 1200.0, "Gabinete");
-                break;
-            default:
-                System.out.println("Opción no válida.");
-                return;
-        }
+        Gabinete gabinete = switch (opcionGabinete) {
+            case 1 -> new NZXTGabinete("NZXT H510", 70, "ATX", true);
+            case 2 -> new NZXTGabinete("Lian Li O11", 150, "ATX", false);
+            default -> throw new IllegalArgumentException("Opción inválida");
+        };
         ensamblaje.agregarGabinete(gabinete);
+
+        scanner.nextLine(); // Limpiar buffer
     }
 
-    /**
-     * Método que permite agregar software opcional a la computadora.
-     */
     private void agregarSoftwareOpcional() {
-        System.out.println("\n¿Deseas agregar software adicional?");
-        System.out.println("1. Windows 11\n2. Office 365\n3. Photoshop\n4. AutoCAD\n5. Terminal Hacker\n6. Ninguno");
+        System.out.println("\n--- Software Adicional ---");
+        System.out.println("¿Desea agregar software? (S/N)");
+        String respuesta = scanner.nextLine();
 
-        boolean seguir = true;
-        while (seguir) {
-            System.out.print("Selecciona una opción (o 6 para terminar): ");
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // limpiar buffer
-
-            switch (opcion) {
-                case 1:
-                    ensamblaje.agregarSoftware(new SoftwareAdicional("Windows 11", 300.0));
-                    break;
-                case 2:
-                    ensamblaje.agregarSoftware(new SoftwareAdicional("Office 365", 250.0));
-                    break;
-                case 3:
-                    ensamblaje.agregarSoftware(new SoftwareAdicional("Adobe Photoshop", 500.0));
-                    break;
-                case 4:
-                    ensamblaje.agregarSoftware(new SoftwareAdicional("AutoCAD", 800.0));
-                    break;
-                case 5:
-                    ensamblaje.agregarSoftware(new SoftwareAdicional("Terminal Hacker", 100.0));
-                    break;
-                case 6:
-                    seguir = false;
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
+        if (respuesta.equalsIgnoreCase("S")) {
+            boolean continuar = true;
+            while (continuar) {
+                System.out.println("\nOpciones de software:");
+                System.out.println("1. Windows 11 Pro - $300");
+                System.out.println("2. Office 365 - $250");
+                System.out.println("3. Adobe Photoshop - $500");
+                System.out.println("4. Finalizar selección");
+                System.out.print("Seleccione: ");
+                
+                int opcion = scanner.nextInt();
+                scanner.nextLine();
+                
+                switch (opcion) {
+                    case 1:
+                        ensamblaje.agregarSoftware(new SoftwareAdicional("Windows 11 Pro", 300));
+                        break;
+                    case 2:
+                        ensamblaje.agregarSoftware(new SoftwareAdicional("Office 365", 250));
+                        break;
+                    case 3:
+                        ensamblaje.agregarSoftware(new SoftwareAdicional("Adobe Photoshop", 500));
+                        break;
+                    case 4:
+                        continuar = false;
+                        break;
+                    default:
+                        System.out.println("Opción inválida");
+                }
             }
         }
     }
 
-    /**
-     * Método que procesa el pedido final y lo agrega a la lista de pedidos.
-     */
     private void flujoFinal() {
-        System.out.print("\nIngresa la dirección de entrega: ");
+        System.out.print("\nIngrese la dirección de entrega: ");
         String direccion = scanner.nextLine();
         ensamblaje.setDireccionEntrega(direccion);
+        
         Pedido pedido = ensamblaje.crearPedido();
         pedidos.add(pedido);
-        System.out.println("Pedido creado exitosamente con ID: " + pedido.getIdPedido());
+        
+        System.out.println("\n¡Pedido creado exitosamente!");
+        System.out.println("Número de pedido: " + pedido.getIdPedido());
+        System.out.println("Total: $" + pedido.getComputadora().calcularPrecioTotal());
     }
 
-    /**
-     * Método que muestra el resumen de los pedidos realizados.
-     */
     private void mostrarResumenPedido() {
-        System.out.println("\n--- Resumen de pedidos ---");
-        for (Pedido p : pedidos) {
-            System.out.println(p);
+        System.out.println("\n--- Resumen de Pedidos ---");
+        if (pedidos.isEmpty()) {
+            System.out.println("No hay pedidos registrados.");
+        } else {
+            for (Pedido pedido : pedidos) {
+                System.out.println("\nPedido #" + pedido.getIdPedido());
+                System.out.println("Fecha: " + pedido.getFechaCreacion());
+                System.out.println("Estado: " + pedido.getEstadoActual().getDescripcionEstado());
+                System.out.println("Total: $" + pedido.getPrecioTotal());
+                System.out.println("Dirección: " + pedido.getDireccionEntrega());
+            }
         }
     }
 }

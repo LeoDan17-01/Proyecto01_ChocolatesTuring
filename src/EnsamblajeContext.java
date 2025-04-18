@@ -24,7 +24,10 @@ public class EnsamblajeContext {
     }
 
     public void manejarPrearmado() {
-        System.out.println("Cargando configuración prearmada...");
+        this.esPrearmado = true;
+        this.factory = new IntelNvidiaFactory();
+        
+        // Configuración prearmada básica
         builder.agregarCPU(factory.crearCPU("i5-13600K"))
               .agregarRAM(factory.crearRAM("16GB", 1))
               .agregarGPU(factory.crearGPU("RTX 3060"))
@@ -32,57 +35,47 @@ public class EnsamblajeContext {
               .agregarFuentePoder(factory.crearFuentePoder("600W"))
               .agregarMotherboard(factory.crearMotherboard("Z590"))
               .agregarGabinete(factory.crearGabinete("NZXT H510"));
-        this.esPrearmado = true;
     }
 
     public void iniciarPersonalizado() {
-        System.out.println("Iniciando configuración personalizada...");
         this.esPrearmado = false;
         this.builder = new ComputadoraBuilder();
         this.estado = new EstadoSeleccionComponentes();
     }
 
-    // Métodos para agregar componentes (TODOS implementados)
+    // Métodos para agregar componentes
     public void agregarCPU(CPU cpu) {
         builder.agregarCPU(cpu);
-        System.out.println("CPU agregado: " + cpu.getDescripcion());
     }
 
     public void agregarRAM(RAM ram) {
         builder.agregarRAM(ram);
-        System.out.println("RAM agregada: " + ram.getDescripcion());
     }
 
     public void agregarGPU(GPU gpu) {
         builder.agregarGPU(gpu);
-        System.out.println("GPU agregada: " + gpu.getDescripcion());
     }
 
     public void agregarDisco(Disco disco) {
         builder.agregarDisco(disco);
-        System.out.println("Disco agregado: " + disco.getDescripcion());
     }
 
     public void agregarFuentePoder(FuentePoder fuente) {
         builder.agregarFuentePoder(fuente);
-        System.out.println("Fuente agregada: " + fuente.getDescripcion());
     }
 
     public void agregarMotherboard(Motherboard motherboard) {
         builder.agregarMotherboard(motherboard);
-        System.out.println("Motherboard agregada: " + motherboard.getDescripcion());
     }
 
     public void agregarGabinete(Gabinete gabinete) {
         builder.agregarGabinete(gabinete);
-        System.out.println("Gabinete agregado: " + gabinete.getDescripcion());
     }
 
     // Métodos para software
     public void agregarSoftware(SoftwareAdicional software) {
         if (!softwareAdicional.contains(software)) {
             softwareAdicional.add(software);
-            System.out.println("Software agregado: " + software.getNombre());
         }
     }
 
@@ -97,7 +90,7 @@ public class EnsamblajeContext {
         );
     }
 
-    // Getters y Setters completos
+    // Getters y Setters
     public EnsamblajeEstado getEstado() { return estado; }
     public void setEstado(EnsamblajeEstado estado) { this.estado = estado; }
     public boolean isEsPrearmado() { return esPrearmado; }
@@ -108,7 +101,43 @@ public class EnsamblajeContext {
     public ComputadoraBuilder getBuilder() { return builder; }
     public List<SoftwareAdicional> getSoftwareAdicional() { return softwareAdicional; }
     public void setFactory(ComponenteFactory factory) { this.factory = factory; }
-    public ComponenteFactory getFactory() {
-        return this.factory;
+    public ComponenteFactory getFactory() { return this.factory; }
+    
+    // Método para verificar compatibilidad
+    public boolean verificarCompatibilidad() {
+        Computadora comp = builder.build();
+        
+        // CPU + Motherboard
+        if (comp.getCpu() != null && comp.getMotherboard() != null) {
+            if (!comp.getCpu().getSocket().equals(comp.getMotherboard().getTipoSocket())) {
+                return false;
+            }
+        }
+        
+        // RAM + Motherboard
+        if (!comp.getRams().isEmpty() && comp.getMotherboard() != null) {
+            String tipoRamEsperado = comp.getMotherboard().getChipset().contains("DDR5") ? "DDR5" : "DDR4";
+            for (RAM ram : comp.getRams()) {
+                if (!ram.getTipoMemoria().equals(tipoRamEsperado)) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+    
+    // Método para adaptar componentes incompatibles
+    public Componente adaptarComponente(Componente componente) {
+        if (componente instanceof AMDCPU) {
+            AMDCPU amdCpu = (AMDCPU) componente;
+            return new IntelCPU(
+                "Intel Equivalente",
+                amdCpu.getPrecio() * 1.1,
+                amdCpu.getNumNucleos(),
+                "LGA1200"
+            );
+        }
+        return componente;
     }
 }

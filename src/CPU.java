@@ -1,24 +1,14 @@
-public abstract class CPU{
-    protected String nombre;
-    protected double precio;
-    protected String marca;
+public abstract class CPU extends Componente {
     protected int numNucleos;
+    protected String socket;
 
-
-    public CPU(String nombre, double precio, String marca, int numNucleos){
-        this.nombre = nombre;
-        this.precio = precio;
-        this.marca = marca;
+    public CPU(String nombre, double precio, String marca, int numNucleos, String socket) {
+        super(nombre, precio, marca);
         this.numNucleos = numNucleos;
+        this.socket = socket;
     }
 
-    public String getNombre() { return nombre; }
-    public double getPrecio() { return precio; }
-    public String getMarca() { return marca; }
+    // Añade estos getters
     public int getNumNucleos() { return numNucleos; }
-
-    
-
-    public abstract String getDescripcion();
-
+    public String getSocket() { return socket; }
 }

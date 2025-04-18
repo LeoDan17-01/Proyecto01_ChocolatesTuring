@@ -1,20 +1,33 @@
-public class EstadoEnsamblaje implements EnsamblajeEstado {
+public class EstadoEnsamblaje implements EstadoEnvio {
     @Override
-    public void procesar(EnsamblajeContext context) {
+    public void procesarEstado(Pedido pedido) {
+        System.out.println("\n=== ENSAMBLAJE DE COMPONENTES ===");
+        
         try {
-            Computadora computadora = context.getBuilder().build();
-            System.out.println("Ensamblaje físico completado exitosamente");
+            Computadora computadora = pedido.getComputadora();
+            System.out.println("Ensamblando componentes...");
             
-            // Verificación de compatibilidad AMD/NVIDIA
-            if (computadora.getCpu() instanceof AMDCPU && 
-                computadora.getGpu() instanceof NvidiaGPU) {
-                System.out.println("Advertencia: CPU AMD con GPU NVIDIA detectado");
-            }
+            // Proceso de ensamblaje
+            System.out.println("- CPU: " + computadora.getCpu().getDescripcion());
+            System.out.println("- GPU: " + computadora.getGpu().getDescripcion());
+            System.out.println("- Ensamblaje completado");
             
-            context.setState(new EstadoVerificacion());
-        } catch (IllegalStateException e) {
-            System.out.println("Error en ensamblaje: " + e.getMessage());
-            context.setState(new EstadoSeleccionComponentes());
+            // Transición al siguiente estado
+            pedido.setEstadoActual(new EstadoVerificacion());
+            
+        } catch (Exception e) {
+            System.err.println("Error en ensamblaje: " + e.getMessage());
+            pedido.setEstadoActual(new EstadoProceso());
         }
+    }
+
+    @Override
+    public String getDescripcionEstado() {
+        return "En proceso de ensamblaje físico";
+    }
+
+    @Override
+    public String getInstruccionesSeguimiento() {
+        return "Los componentes están siendo ensamblados por nuestros técnicos";
     }
 }

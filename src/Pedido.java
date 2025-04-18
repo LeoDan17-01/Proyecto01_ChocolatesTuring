@@ -1,9 +1,5 @@
 import java.time.LocalDate;
 
-/**
- * Clase que representa un pedido en el sistema de MonosChinos MX
- * Mantiene el estado actual del pedido y su información asociada
- */
 public class Pedido {
     private String idPedido;
     private EstadoEnvio estadoActual;
@@ -13,9 +9,6 @@ public class Pedido {
     private LocalDate fechaCreacion;
     private double precioTotal;
 
-    /**
-     * Constructor completo para un pedido
-     */
     public Pedido(String idPedido, String sucursalDestino, String direccionEntrega, Computadora computadora) {
         this.idPedido = idPedido;
         this.estadoActual = new EstadoProceso();
@@ -26,24 +19,18 @@ public class Pedido {
         this.precioTotal = computadora.calcularPrecioTotal();
     }
 
-    /**
-     * Avanza el estado del pedido al siguiente estado lógico
-     */
+    // Métodos para avanzar el estado
     public void avanzarEstado() {
         estadoActual.procesarEstado(this);
     }
 
-    // Getters y Setters
+    // Getters
     public String getIdPedido() {
         return idPedido;
     }
 
     public EstadoEnvio getEstadoActual() {
         return estadoActual;
-    }
-
-    public void setEstadoActual(EstadoEnvio estadoActual) {
-        this.estadoActual = estadoActual;
     }
 
     public String getSucursalDestino() {
@@ -66,15 +53,27 @@ public class Pedido {
         return precioTotal;
     }
 
-    /**
-     * Genera un resumen del pedido en formato String
-     */
+    // Setters
+    public void setEstadoActual(EstadoEnvio estadoActual) {
+        this.estadoActual = estadoActual;
+        System.out.println("Estado del pedido actualizado a: " + estadoActual.getDescripcionEstado());
+    }
+
+    public void setDireccionEntrega(String direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
+    }
+
     @Override
     public String toString() {
-        return "Pedido #" + idPedido + 
-               "\nEstado: " + estadoActual.getDescripcionEstado() +
-               "\nSucursal: " + sucursalDestino +
-               "\nTotal: $" + precioTotal +
-               "\nFecha: " + fechaCreacion;
+        return String.format(
+            "Pedido #%s [Estado: %s]%n" +
+            "Sucursal: %s%n" +
+            "Destino: %s%n" +
+            "Total: $%.2f%n" +
+            "Fecha: %s",
+            idPedido, estadoActual.getDescripcionEstado(),
+            sucursalDestino, direccionEntrega,
+            precioTotal, fechaCreacion
+        );
     }
 }

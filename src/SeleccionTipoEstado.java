@@ -4,17 +4,18 @@
 public class SeleccionTipoEstado implements EnsamblajeEstado {
     @Override
     public void procesar(EnsamblajeContext context) {
-        
-        // Aquí se maneja la lógica de selección del tipo de ensamblaje (pre-armado o personalizado)
         System.out.println("Seleccionando tipo de ensamblaje...");
-        if (context.esPrearmado()) {//.esPrearmado()
-            // Lógica para ensamblaje pre-armado
+        if (context.isEsPrearmado()) {
             System.out.println("Seleccionado ensamblaje pre-armado.");
             context.manejarPrearmado();
         } else {
-            // Lógica para ensamblaje personalizado
             System.out.println("Seleccionado ensamblaje personalizado.");
-            context.manejarPersonalizado();
-        }      
+            context.iniciarPersonalizado();
+        }
+    }
+
+    @Override
+    public String getDescripcion() {
+        return "Estado de selección de tipo de ensamblaje";
     }
 }

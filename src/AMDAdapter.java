@@ -1,9 +1,8 @@
-public class AMDadapter implements Compatibilidad{
+public class AMDAdapter implements Compatibilidad {
     @Override
     public boolean esCompatible(Componente componente1, Componente componente2) {
-        // Lógica compleja de compatibilidad
         if (componente1 instanceof AMDCPU && componente2 instanceof NvidiaGPU) {
-            return false; // Incompatibilidad conocida
+            return false;
         }
         return true;
     }
@@ -12,11 +11,12 @@ public class AMDadapter implements Compatibilidad{
     public Componente adaptarComponente(Componente componente) {
         if (componente instanceof AMDCPU) {
             AMDCPU amdCpu = (AMDCPU) componente;
-            // Crear un CPU Intel equivalente
-            return new IntelCPU("Intel equivalente", 
-                              amdCpu.getPrecio() * 1.1, 
-                              "Intel", 
-                              amdCpu.getCantidadNucleos());
+            return new IntelCPU(
+                "Intel Equivalente",
+                amdCpu.getPrecio() * 1.1,  // Ahora funcionará
+                amdCpu.getNumNucleos(),
+                "LGA1200"
+            );
         }
         return componente;
     }

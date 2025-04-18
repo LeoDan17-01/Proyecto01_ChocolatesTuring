@@ -6,6 +6,6 @@ public class ASUSMotherboard extends Motherboard {
     @Override
     public String getDescripcion() {
         return String.format("Motherboard ASUS %s - Chipset %s - Socket %s - $%.2f",
-               nombre, chipset, tipoSocket, precio);
+               getNombre(), getChipset(), getTipoSocket(), getPrecio());
     }
 }

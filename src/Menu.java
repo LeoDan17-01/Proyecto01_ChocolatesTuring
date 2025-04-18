@@ -21,7 +21,7 @@ public class Menu {
         boolean seguirComprando= true;
         System.out.println("-----------------------------------------------------------");
         System.out.println("-----------------------------------------------------------");
-        System.out.println("                    PC's MonosChinos MX);
+        System.out.println("                    PC's MonosChinos MX");
         System.out.println("-----------------------------------------------------------");
         System.out.println("-----------------------------------------------------------\n");
 

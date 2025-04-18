@@ -15,17 +15,16 @@ public class EnsamblajeContext {
         this.builder = new ComputadoraBuilder();
         this.sucursalActual = sucursalActual;
         this.softwareAdicional = new ArrayList<>();
-        this.factory = new IntelNvidiaFactory(); // Factory por defecto
+        this.factory = new IntelNvidiaFactory();
+        this.esPrearmado = false;
     }
 
-    // Método principal que procesa el estado actual
     public void procesar() {
         estado.procesar(this);
     }
 
-    // Manejo de configuración prearmada
     public void manejarPrearmado() {
-        System.out.println("Cargando configuración prearmada estándar...");
+        System.out.println("Cargando configuración prearmada...");
         builder.agregarCPU(factory.crearCPU("i5-13600K"))
               .agregarRAM(factory.crearRAM("16GB", 1))
               .agregarGPU(factory.crearGPU("RTX 3060"))
@@ -33,17 +32,17 @@ public class EnsamblajeContext {
               .agregarFuentePoder(factory.crearFuentePoder("600W"))
               .agregarMotherboard(factory.crearMotherboard("Z590"))
               .agregarGabinete(factory.crearGabinete("NZXT H510"));
+        this.esPrearmado = true;
     }
 
-    // Método para iniciar ensamblaje personalizado
     public void iniciarPersonalizado() {
-        System.out.println("Iniciando modo de ensamblaje personalizado...");
+        System.out.println("Iniciando configuración personalizada...");
         this.esPrearmado = false;
-        this.builder = new ComputadoraBuilder(); // Reset builder
+        this.builder = new ComputadoraBuilder();
         this.estado = new EstadoSeleccionComponentes();
     }
 
-    // Métodos para agregar componentes en modo personalizado
+    // Métodos para agregar componentes (TODOS implementados)
     public void agregarCPU(CPU cpu) {
         builder.agregarCPU(cpu);
         System.out.println("CPU agregado: " + cpu.getDescripcion());
@@ -79,66 +78,37 @@ public class EnsamblajeContext {
         System.out.println("Gabinete agregado: " + gabinete.getDescripcion());
     }
 
-    // Métodos para software adicional
+    // Métodos para software
     public void agregarSoftware(SoftwareAdicional software) {
         if (!softwareAdicional.contains(software)) {
             softwareAdicional.add(software);
             System.out.println("Software agregado: " + software.getNombre());
-        } else {
-            System.out.println("El software " + software.getNombre() + " ya fue agregado");
         }
     }
 
-    // Creación del pedido final
     public Pedido crearPedido() {
         Computadora computadora = builder.build();
         computadora.setSoftware(softwareAdicional);
-        return new Pedido(generarIdPedido(), sucursalActual, direccionEntrega, computadora);
+        return new Pedido(
+            "PED-" + System.currentTimeMillis(),
+            sucursalActual,
+            direccionEntrega,
+            computadora
+        );
     }
 
-    // Generación de ID único para el pedido
-    private String generarIdPedido() {
-        return "PED-" + System.currentTimeMillis() + "-" + sucursalActual.substring(0, 3);
-    }
-
-    // Getters y Setters
-    public EnsamblajeEstado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(EnsamblajeEstado estado) {
-        this.estado = estado;
-    }
-
-    public boolean isEsPrearmado() {
-        return esPrearmado;
-    }
-
-    public void setEsPrearmado(boolean esPrearmado) {
-        this.esPrearmado = esPrearmado;
-    }
-
-    public String getDireccionEntrega() {
-        return direccionEntrega;
-    }
-
-    public void setDireccionEntrega(String direccionEntrega) {
-        this.direccionEntrega = direccionEntrega;
-    }
-
-    public String getSucursalActual() {
-        return sucursalActual;
-    }
-
-    public ComputadoraBuilder getBuilder() {
-        return builder;
-    }
-
-    public List<SoftwareAdicional> getSoftwareAdicional() {
-        return softwareAdicional;
-    }
-
-    public void setFactory(ComponenteFactory factory) {
-        this.factory = factory;
+    // Getters y Setters completos
+    public EnsamblajeEstado getEstado() { return estado; }
+    public void setEstado(EnsamblajeEstado estado) { this.estado = estado; }
+    public boolean isEsPrearmado() { return esPrearmado; }
+    public void setEsPrearmado(boolean esPrearmado) { this.esPrearmado = esPrearmado; }
+    public String getDireccionEntrega() { return direccionEntrega; }
+    public void setDireccionEntrega(String direccionEntrega) { this.direccionEntrega = direccionEntrega; }
+    public String getSucursalActual() { return sucursalActual; }
+    public ComputadoraBuilder getBuilder() { return builder; }
+    public List<SoftwareAdicional> getSoftwareAdicional() { return softwareAdicional; }
+    public void setFactory(ComponenteFactory factory) { this.factory = factory; }
+    public ComponenteFactory getFactory() {
+        return this.factory;
     }
 }

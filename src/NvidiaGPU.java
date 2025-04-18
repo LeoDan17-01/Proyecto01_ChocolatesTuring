@@ -6,6 +6,6 @@ public class NvidiaGPU extends GPU {
     @Override
     public String getDescripcion() {
         return String.format("GPU NVIDIA %s - %dGB %s - $%.2f",
-               nombre, vramGB, tipoMemoria, precio);
+               getNombre(), getVramGB(), getTipoMemoria(), getPrecio());
     }
 }

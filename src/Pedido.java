@@ -18,11 +18,11 @@ public class Pedido {
      * Crea un nuevo pedido con los datos iniciales.
      *
      * @param idPedido          ID único del pedido.
-     * @param sucursalOrigen   Sucursal de origen.
+     * @param sucursalOrigen    Sucursal de origen.
      * @param direccionEntrega  Dirección de entrega del pedido.
      * @param computadora       Computadora asociada al pedido.
      */
-    public Pedido(String idPedido,Sucursal sucursalOrigen, String direccionEntrega, Computadora computadora) {
+    public Pedido(String idPedido, Sucursal sucursalOrigen, String direccionEntrega, Computadora computadora) {
         this.idPedido = idPedido;
         this.estadoActual = new EstadoProceso();
         this.sucursalOrigen = sucursalOrigen;
@@ -30,8 +30,15 @@ public class Pedido {
         this.computadora = computadora;
         this.fechaCreacion = LocalDate.now();
         this.precioTotal = computadora.calcularPrecioTotal();
-        if(!sucursalOrigen.isCentral()){
-            this.sucursalDestino = sucursalOrigen.getSucursales().stream().filter(Sucursal::isCentral).findFirst().orElseThrow();
+        
+        // Determinar la sucursal destino
+        if(!sucursalOrigen.isCentral()) {
+            this.sucursalDestino = Distribuidor.getInstance().getSucursales().stream()
+                .filter(Sucursal::isCentral)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No se encontró sucursal central"));
+        } else {
+            this.sucursalDestino = sucursalOrigen;
         }
     }
 
@@ -63,18 +70,18 @@ public class Pedido {
     /**
      * Devuelve la sucursal de origen del pedido.
      *
-     * @return Nombre de la sucursal.
+     * @return Objeto Sucursal de origen.
      */
-    public Sucursal getSucursalOrigen(){
+    public Sucursal getSucursalOrigen() {
         return sucursalOrigen;
     }
 
     /**
      * Devuelve la sucursal de destino del pedido.
      *
-     * @return Nombre de la sucursal.
+     * @return Objeto Sucursal de destino.
      */
-    public String getSucursalDestino() {
+    public Sucursal getSucursalDestino() {
         return sucursalDestino;
     }
 
@@ -99,7 +106,7 @@ public class Pedido {
     /**
      * Obtiene la fecha en que se creó el pedido.
      *
-     * @return Fecha de creación como LocalDateTime.
+     * @return Fecha de creación como LocalDate.
      */
     public LocalDate getFechaCreacion() {
         return fechaCreacion;
@@ -145,9 +152,11 @@ public class Pedido {
             "Total: $%.2f%n" +
             "Fecha: %s%n" +
             "Estado: %s",
-            idPedido, sucursalOrigen.getNombre(),
-            sucursalDestino != null ? sucursalDestino.getNombre(): "Local", fechaCreacion,
-            precioTotal, estadoActual.getDescripcionEstado());
-       
+            idPedido, 
+            sucursalOrigen.getNombre(),
+            sucursalDestino.getNombre(), 
+            precioTotal, 
+            fechaCreacion,
+            estadoActual.getDescripcionEstado());
     }
 }

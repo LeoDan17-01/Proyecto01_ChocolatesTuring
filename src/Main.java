@@ -10,7 +10,6 @@ public class Main {
      * @param args Argumentos de línea de comandos (no utilizados).
      */
     public static void main(String[] args) {
-
         Distribuidor distribuidor = Distribuidor.getInstance();
         distribuidor.agregarSucursal(new Sucursal("CDMX", "Av.Principal 321", true));
         distribuidor.agregarSucursal(new Sucursal("Chihuahua", "Calle Zacapa 87", false));

@@ -11,7 +11,6 @@ public class EnsamblajeContext {
     private EnsamblajeEstado estado;
     private ComputadoraBuilder builder;
     private boolean esPrearmado;
-    private List<Sucursal> sucursales;
     private String sucursalActual;
     private String direccionEntrega;
     private List<SoftwareAdicional> softwareAdicional;
@@ -25,9 +24,7 @@ public class EnsamblajeContext {
     public EnsamblajeContext(String sucursalActual) {
         this.estado = new SeleccionTipoEstado();
         this.builder = new ComputadoraBuilder();
-        this.sucursales = new ArrayList<>();
-        inicializarSucursales();
-        this.sucursalActual = obtenerSucursalPorNombre(nombreSucursal);
+        this.sucursalActual = sucursalActual;
         this.softwareAdicional = new ArrayList<>();
         this.factory = new IntelNvidiaFactory();
         this.esPrearmado = false;
@@ -56,22 +53,6 @@ public class EnsamblajeContext {
               .agregarGabinete(factory.crearGabinete("NZXT H510"));
     }
 
-    public void inicializarSucursales(){
-        sucursales.add(new Sucursal("CDMX", "Av.Principal 321", true));
-        sucursales.add(new Sucursal("Chihuahua", "Calle Zacapa 87", false));
-        sucursales.add(new Sucursal("Jalisco", "Calle Prados del Nilo 75", false));
-        sucursales.add(new Sucursal("Yucatán", "Circuito Colinas 194B", false));
-
-    }
-
-    private Sucursal obtenerSucursalPorNombre(String nombre){
-        return sucursales.stream().filter(s -> s.getNombre().equalsIgnoreCase(nombre)).findFirst().orElseThrow(() -> new IllegalArgumentException("Sucursal no encontrada ;("));
-    }
-
-    public List<Sucursal> getSucursales(){
-        return sucursales;
-    }
-
     /**
      * Inicia el modo de configuración personalizada de componentes.
      */
@@ -83,7 +64,6 @@ public class EnsamblajeContext {
 
     /**
      * Agrega una CPU al ensamblaje actual.
-     *
      * @param cpu la CPU que se desea agregar al sistema.
      */
     public void agregarCPU(CPU cpu) {
@@ -92,7 +72,6 @@ public class EnsamblajeContext {
 
     /**
      * Agrega una memoria RAM al ensamblaje actual.
-     *
      * @param ram módulo de memoria RAM a agregar.
      */
     public void agregarRAM(RAM ram) {
@@ -101,7 +80,6 @@ public class EnsamblajeContext {
 
     /**
      * Agrega una tarjeta gráfica (GPU) al ensamblaje actual.
-     *
      * @param gpu tarjeta gráfica a agregar.
      */
     public void agregarGPU(GPU gpu) {
@@ -110,7 +88,6 @@ public class EnsamblajeContext {
 
     /**
      * Agrega un disco de almacenamiento (HDD o SSD) al ensamblaje actual.
-     *
      * @param disco unidad de almacenamiento a agregar.
      */
     public void agregarDisco(Disco disco) {
@@ -119,7 +96,6 @@ public class EnsamblajeContext {
 
     /**
      * Agrega una fuente de poder al ensamblaje actual.
-     *
      * @param fuente fuente de poder a agregar.
      */
     public void agregarFuentePoder(FuentePoder fuente) {
@@ -128,7 +104,6 @@ public class EnsamblajeContext {
 
     /**
      * Agrega una placa madre (motherboard) al ensamblaje actual.
-     *
      * @param motherboard la motherboard a agregar.
      */
     public void agregarMotherboard(Motherboard motherboard) {
@@ -137,7 +112,6 @@ public class EnsamblajeContext {
 
     /**
      * Agrega un gabinete al ensamblaje actual.
-     *
      * @param gabinete el gabinete a instalar.
      */
     public void agregarGabinete(Gabinete gabinete) {
@@ -146,7 +120,6 @@ public class EnsamblajeContext {
 
     /**
      * Agrega software adicional al pedido si no ha sido agregado antes.
-     *
      * @param software Software a agregar.
      */
     public void agregarSoftware(SoftwareAdicional software) {
@@ -157,101 +130,27 @@ public class EnsamblajeContext {
 
     /**
      * Crea un objeto Pedido a partir de la configuración actual de la computadora.
-     *
      * @return El pedido generado.
      */
     public Pedido crearPedido() {
         Computadora computadora = builder.build();
         computadora.setSoftware(softwareAdicional);
+        
+        Sucursal sucursal = Distribuidor.getInstance().getSucursales().stream()
+            .filter(s -> s.getNombre().equalsIgnoreCase(sucursalActual))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("Sucursal no encontrada"));
+        
         return new Pedido(
             "PED-" + System.currentTimeMillis(),
-            sucursalActual,
+            sucursal,
             direccionEntrega,
             computadora
         );
     }
 
     /**
-     * Obtiene el estado actual del proceso de ensamblaje.
-     *
-     * @return el estado actual del ensamblaje.
-     */
-    public EnsamblajeEstado getEstado() { return estado; }
-
-    /**
-     * Cambia el estado actual del ensamblaje.
-     *
-     * @param estado nuevo estado a establecer.
-     */
-    public void setEstado(EnsamblajeEstado estado) { this.estado = estado; }
-
-    /**
-     * Indica si el ensamblaje actual es un prearmado.
-     *
-     * @return true si es prearmado, false si es personalizado.
-     */
-    public boolean isEsPrearmado() { return esPrearmado; }
-
-    /**
-     * Define si el ensamblaje es de tipo prearmado o personalizado.
-     *
-     * @param esPrearmado true si es prearmado, false si es personalizado.
-     */
-    public void setEsPrearmado(boolean esPrearmado) { this.esPrearmado = esPrearmado; }
-
-    /**
-     * Obtiene la dirección de entrega asociada al pedido.
-     *
-     * @return la dirección donde se enviará la computadora.
-     */
-    public String getDireccionEntrega() { return direccionEntrega; }
-
-    /**
-     * Establece la dirección de entrega del pedido.
-     *
-     * @param direccionEntrega dirección física para enviar la computadora.
-     */
-    public void setDireccionEntrega(String direccionEntrega) { this.direccionEntrega = direccionEntrega; }
-
-    /**
-     * Obtiene el nombre de la sucursal actual donde se ensambla la computadora.
-     *
-     * @return nombre de la sucursal (ej: "CDMX").
-     */
-    public Sucursal getSucursalActual() { return sucursalActual; }
-
-    /**
-     * Devuelve el builder interno utilizado para construir la computadora.
-     *
-     * @return instancia del ComputadoraBuilder.
-     */
-    public ComputadoraBuilder getBuilder() { return builder; }
-
-    /**
-     * Devuelve la lista de software adicional seleccionado por el usuario.
-     *
-     * @return lista de software agregado.
-     */
-    public List<SoftwareAdicional> getSoftwareAdicional() { return softwareAdicional; }
-
-    /**
-     * Cambia la fábrica de componentes utilizada durante el ensamblaje.
-     *
-     * @param factory nueva fábrica a usar (ej: AMDFactory, IntelNvidiaFactory).
-     */
-
-    public void setFactory(ComponenteFactory factory) { this.factory = factory; }
-
-    /**
-     * Devuelve la fábrica de componentes actual (AMD, Intel, etc).
-     *
-     * @return la fábrica activa utilizada para crear componentes.
-     */
-    public ComponenteFactory getFactory() { return this.factory; }
-    
-    /**
      * Verifica la compatibilidad básica entre CPU, motherboard y RAM.
-     *
      * @return true si todos los componentes son compatibles, false si hay conflicto.
      */
     public boolean verificarCompatibilidad() {
@@ -280,7 +179,6 @@ public class EnsamblajeContext {
     /**
      * Adapta un componente incompatible a uno equivalente.
      * Actualmente solo convierte AMDCPU a IntelCPU.
-     *
      * @param componente Componente original.
      * @return Componente adaptado o el mismo si no aplica.
      */
@@ -295,5 +193,51 @@ public class EnsamblajeContext {
             );
         }
         return componente;
+    }
+
+    // Getters y Setters
+
+    public EnsamblajeEstado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EnsamblajeEstado estado) {
+        this.estado = estado;
+    }
+
+    public boolean isEsPrearmado() {
+        return esPrearmado;
+    }
+
+    public void setEsPrearmado(boolean esPrearmado) {
+        this.esPrearmado = esPrearmado;
+    }
+
+    public String getDireccionEntrega() {
+        return direccionEntrega;
+    }
+
+    public void setDireccionEntrega(String direccionEntrega) {
+        this.direccionEntrega = direccionEntrega;
+    }
+
+    public String getSucursalActual() {
+        return sucursalActual;
+    }
+
+    public ComputadoraBuilder getBuilder() {
+        return builder;
+    }
+
+    public List<SoftwareAdicional> getSoftwareAdicional() {
+        return softwareAdicional;
+    }
+
+    public ComponenteFactory getFactory() {
+        return this.factory;
+    }
+
+    public void setFactory(ComponenteFactory factory) {
+        this.factory = factory;
     }
 }

@@ -3,7 +3,6 @@ import java.util.List;
 
 /**
  * Clase que representa la vista de usuario basada en terminal (consola).
- * 
  * Proporciona métodos para mostrar mensajes, errores, leer entradas del usuario
  * y facilitar la interacción textual con el sistema.
  */
@@ -21,7 +20,7 @@ public class VistaTerminal {
      * Muestra el menú principal de la aplicación.
      */
     public void mostrarMenuPrincipal() {
-        System.out.println("-----------------------------------------------------------");
+        System.out.println("\n-----------------------------------------------------------");
         System.out.println("                PC Builder - Ensamblaje de Computadoras");
         System.out.println("-----------------------------------------------------------");
         System.out.println("\nMenú Principal:");
@@ -32,47 +31,15 @@ public class VistaTerminal {
         System.out.print("Seleccione una opción: ");
     }
     
-    public void mostrarInfoSucursal(Sucursal sucursal){
-        System.out.println("\n ===== INFORMACIÓN DE SUCURSAL ====");
+    /**
+     * Muestra información detallada de una sucursal.
+     * @param sucursal La sucursal a mostrar
+     */
+    public void mostrarInfoSucursal(Sucursal sucursal) {
+        System.out.println("\n===== INFORMACIÓN DE SUCURSAL ====");
         System.out.println("Nombre: " + sucursal.getNombre());
         System.out.println("Dirección: " + sucursal.getDireccion());
-        System.out.println("Tipo: " + (sucursal.isCentral() ? "Central (CDMX)": "Regional"));
-    }
-
-    public static Distribuidor getInstance(){
-        if(instance == null){
-            instance = new Distribuidor();
-        }
-        return instance;
-    }
-
-    public void agregarSucursal(Sucursal sucursal){
-        sucursales.add(sucursal);
-    }
-
-    public void enviarPedidoACentral(Pedido pedido){
-        if(!pedido.getSucursalOrigen().isCentral()){
-            System.out.println("\n ==== DISTRIBUCIÓN DE PEDIDO ====");
-            System.out.println("Enviando pedido #" + pedido.getIdPedido());
-            System.out.println(" Desde: " + pedido.getSucursalOrigen().getNombre());
-            System.out.println(" Hacia: " + pedido.getSucursalDestino().getNombre());
-            System.out.println(" Pedido: " + pedido.getComputadora().getCpu().getNombre());
-            //Lógica adicional :(
-            System.out.println("Pedido en camino a la central.");
-        }
-    }
-    public void distribuirComponentes(Sucursal origen, Sucursal destino, Componente componente, int cantidad){
-        System.out.println("\n === DISTRIBUCIÓN DE COMPONENTES ===");
-        System.out.println("Componente: " + componente.getNombre());
-        System.out.println("Cantidad: " + cantidad);
-        System.out.println("Desde: " + origen.getNombre());
-        System.out.println("Hacia: " + destino.getNombre());
-        //Lógica de transferencia de inventario
-        origen.getInventario().agregarComponente(componente);
-        destino.getInventario().agregarComponente(componente);
-
-        System.out.println("Distribución completada exitosamente :) ");
-
+        System.out.println("Tipo: " + (sucursal.isCentral() ? "Central (CDMX)" : "Regional"));
     }
 
     /**
@@ -93,7 +60,9 @@ public class VistaTerminal {
      */
     public void mostrarMenuRAM() {
         System.out.println("\n=== SELECCIÓN DE RAM ===");
-        System.out.print("Ingrese cantidad de GB (16/32): ");
+        System.out.println("1. ADATA 16GB DDR4 3200MHz");
+        System.out.println("2. ADATA 32GB DDR4 3200MHz");
+        System.out.print("Seleccione RAM: ");
     }
     
     /**
@@ -103,7 +72,6 @@ public class VistaTerminal {
         System.out.println("\n=== SELECCIÓN DE GPU ===");
         System.out.println("1. NVIDIA RTX 3060");
         System.out.println("2. NVIDIA RTX 4070");
-        System.out.println("3. AMD Radeon RX 6700 XT");
         System.out.print("Seleccione GPU: ");
     }
     
@@ -114,8 +82,6 @@ public class VistaTerminal {
         System.out.println("\n=== SELECCIÓN DE DISCO ===");
         System.out.println("1. SSD 500GB");
         System.out.println("2. SSD 1TB");
-        System.out.println("3. HDD 1TB");
-        System.out.println("4. HDD 2TB");
         System.out.print("Seleccione disco: ");
     }
     
@@ -126,7 +92,6 @@ public class VistaTerminal {
         System.out.println("\n=== SELECCIÓN DE FUENTE ===");
         System.out.println("1. EVGA 600W 80+ Bronze");
         System.out.println("2. Corsair 750W 80+ Gold");
-        System.out.println("3. XPG 1000W 80+ Platinum");
         System.out.print("Seleccione fuente: ");
     }
     
@@ -137,7 +102,6 @@ public class VistaTerminal {
         System.out.println("\n=== SELECCIÓN DE MOTHERBOARD ===");
         System.out.println("1. ASUS Z590 (Intel)");
         System.out.println("2. ASUS B550 (AMD)");
-        System.out.println("3. MSI B760 (Intel)");
         System.out.print("Seleccione motherboard: ");
     }
     
@@ -148,7 +112,6 @@ public class VistaTerminal {
         System.out.println("\n=== SELECCIÓN DE GABINETE ===");
         System.out.println("1. NZXT H510");
         System.out.println("2. Lian Li O11 Dynamic");
-        System.out.println("3. Yeyian Shuriken");
         System.out.print("Seleccione gabinete: ");
     }
     
@@ -160,16 +123,13 @@ public class VistaTerminal {
         System.out.println("1. Windows 11 Pro - $300");
         System.out.println("2. Microsoft Office 365 - $250");
         System.out.println("3. Adobe Photoshop - $500");
-        System.out.println("4. AutoCad - $700");
-        System.out.println("5. Terminal con WSL - $150");
-        System.out.println("6. Finalizar selección");
+        System.out.println("4. Finalizar selección");
         System.out.print("Seleccione software: ");
     }
     
     /**
      * Lee una opción numérica del usuario.
-     *
-     * @return opción ingresada.
+     * @return opción ingresada
      */
     public int leerOpcion() {
         while (!scanner.hasNextInt()) {
@@ -183,8 +143,7 @@ public class VistaTerminal {
     
     /**
      * Lee una línea completa de entrada del usuario.
-     *
-     * @return línea ingresada como texto.
+     * @return línea ingresada como texto
      */
     public String leerLinea() {
         return scanner.nextLine();
@@ -192,8 +151,7 @@ public class VistaTerminal {
     
     /**
      * Solicita al usuario ingresar una dirección de entrega.
-     *
-     * @return dirección ingresada.
+     * @return dirección ingresada
      */
     public String leerDireccion() {
         System.out.print("\nIngrese la dirección de entrega: ");
@@ -202,9 +160,8 @@ public class VistaTerminal {
     
     /**
      * Solicita una confirmación (Sí/No) al usuario.
-     *
-     * @param mensaje Mensaje a mostrar.
-     * @return true si el usuario responde "S", false en caso contrario.
+     * @param mensaje Mensaje a mostrar
+     * @return true si el usuario responde "S", false en caso contrario
      */
     public boolean confirmar(String mensaje) {
         System.out.print(mensaje + " (S/N): ");
@@ -214,17 +171,15 @@ public class VistaTerminal {
     
     /**
      * Muestra un mensaje estándar en la consola.
-     *
-     * @param mensaje Texto que se desea mostrar.
+     * @param mensaje Texto que se desea mostrar
      */
     public void mostrarMensaje(String mensaje) {
         System.out.println(mensaje);
     }
     
     /**
-     * Muestra un mensaje de error en consola, precedido por "ERROR: ".
-     *
-     * @param mensaje Mensaje de error a mostrar.
+     * Muestra un mensaje de error en consola.
+     * @param error Mensaje de error a mostrar
      */
     public void mostrarError(String error) {
         System.err.println("Error: " + error);
@@ -232,8 +187,7 @@ public class VistaTerminal {
     
     /**
      * Muestra un mensaje de éxito al agregar un componente.
-     *
-     * @param descripcion Descripción del componente agregado.
+     * @param descripcion Descripción del componente agregado
      */
     public void mostrarComponenteAgregado(String descripcion) {
         System.out.println("✓ " + descripcion);
@@ -241,32 +195,30 @@ public class VistaTerminal {
     
     /**
      * Muestra una advertencia de compatibilidad al usuario.
-     *
-     * @param mensaje Texto con la advertencia.
+     * @param mensaje Texto con la advertencia
      */
     public void mostrarAdvertenciaCompatibilidad(String mensaje) {
-        System.out.println(" Advertencia: " + mensaje);
+        System.out.println("! Advertencia: " + mensaje);
     }
     
     /**
      * Muestra el resumen de un pedido específico.
-     *
-     * @param pedido Pedido a mostrar.
+     * @param pedido Pedido a mostrar
      */
     public void mostrarResumenPedido(Pedido pedido) {
         System.out.println("\n=== RESUMEN DE PEDIDO ===");
         System.out.println("Número: " + pedido.getIdPedido());
         System.out.println("Fecha: " + pedido.getFechaCreacion());
-        System.out.println("Sucursal: " + pedido.getSucursalDestino());
+        System.out.println("Sucursal Origen: " + pedido.getSucursalOrigen().getNombre());
+        System.out.println("Sucursal Destino: " + pedido.getSucursalDestino().getNombre());
         System.out.println("Dirección: " + pedido.getDireccionEntrega());
         System.out.println("Estado: " + pedido.getEstadoActual().getDescripcionEstado());
-        System.out.println("Total: $" + pedido.getPrecioTotal());
+        System.out.printf("Total: $%.2f%n", pedido.getPrecioTotal());
     }
     
     /**
      * Muestra una lista de todos los pedidos registrados.
-     *
-     * @param pedidos Lista de pedidos.
+     * @param pedidos Lista de pedidos
      */
     public void mostrarListaPedidos(List<Pedido> pedidos) {
         System.out.println("\n=== HISTORIAL DE PEDIDOS ===");
@@ -282,20 +234,24 @@ public class VistaTerminal {
     
     /**
      * Muestra en detalle los componentes de una computadora ensamblada.
-     *
-     * @param computadora Computadora a mostrar.
+     * @param computadora Computadora a mostrar
      */
     public void mostrarDetallesComputadora(Computadora computadora) {
         System.out.println("\n=== DETALLES DE LA COMPUTADORA ===");
         System.out.println("- CPU: " + computadora.getCpu().getDescripcion());
-        System.out.println("- RAM: " + computadora.getRams().get(0).getDescripcion());
+        
+        int totalRAM = computadora.getRams().stream().mapToInt(RAM::getCapacidadGB).sum();
+        System.out.println("- RAM: " + totalRAM + "GB");
+        
         if (computadora.getGpu() != null) {
             System.out.println("- GPU: " + computadora.getGpu().getDescripcion());
         }
-        System.out.println("- Almacenamiento: ");
+        
+        System.out.println("- Almacenamiento:");
         for (Disco disco : computadora.getDiscos()) {
             System.out.println("  • " + disco.getDescripcion());
         }
+        
         System.out.println("- Fuente: " + computadora.getFuente().getDescripcion());
         System.out.println("- Motherboard: " + computadora.getMotherboard().getDescripcion());
         System.out.println("- Gabinete: " + computadora.getGabinete().getDescripcion());
@@ -303,11 +259,11 @@ public class VistaTerminal {
         if (!computadora.getSoftware().isEmpty()) {
             System.out.println("- Software incluido:");
             for (SoftwareAdicional soft : computadora.getSoftware()) {
-                System.out.println("  • " + soft.getNombre() + " - $" + soft.getPrecio());
+                System.out.printf("  • %s - $%.2f%n", soft.getNombre(), soft.getPrecio());
             }
         }
         
-        System.out.println("TOTAL: $" + computadora.calcularPrecioTotal());
+        System.out.printf("TOTAL: $%.2f%n", computadora.calcularPrecioTotal());
     }
     
     /**

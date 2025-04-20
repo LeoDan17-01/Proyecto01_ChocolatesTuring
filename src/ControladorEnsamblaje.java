@@ -19,22 +19,24 @@ public class ControladorEnsamblaje {
         this.ensamblaje = new EnsamblajeContext(sucursalActual);
     }
 
-    public void selecionarSucursal(){
+    /**
+     * Permite al usuario seleccionar la sucursal donde se realizará el ensamblaje
+     */
+    public void seleccionarSucursal() {
         vista.mostrarMensaje("\n -- Selección de Sucursal --");
-        List<Sucursal> sucarsales = ensamblaje.getSucursales();
+        List<Sucursal> sucursales = Distribuidor.getInstance().getSucursales();
 
-        for(int i= 0; i < sucursales.size(); i++){
+        for(int i = 0; i < sucursales.size(); i++) {
             vista.mostrarMensaje((i + 1) + ". " + sucursales.get(i));
-
         }
 
-        vista.mostrarMensaje("Seleccione su sucursal por favor : ");
-        int opcion = vista.leerOpcion() -1;
+        vista.mostrarMensaje("Seleccione su sucursal por favor: ");
+        int opcion = vista.leerOpcion() - 1;
 
-        if(opcion >= 0 && opcion < sucursales.size()){
-            ensamblaje = new EnsamblajeContext(sucursales.get(opcion).getNombre);
-            vista.mostrarMensaje("Sucursal seleccionada: " + sucursales.get(opcion).getNOmbre());
-        }else{
+        if(opcion >= 0 && opcion < sucursales.size()) {
+            ensamblaje = new EnsamblajeContext(sucursales.get(opcion).getNombre());
+            vista.mostrarMensaje("Sucursal seleccionada: " + sucursales.get(opcion).getNombre());
+        } else {
             vista.mostrarError("Opción inválida, usando CDMX por defecto");
             ensamblaje = new EnsamblajeContext("CDMX");
         }
@@ -372,4 +374,4 @@ public class ControladorEnsamblaje {
             }
         }
     }
-} 
+}

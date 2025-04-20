@@ -1,4 +1,15 @@
+/**
+ * Fábrica concreta para la creación de componentes AMD.
+ * Implementa la interfaz ComponenteFactory.
+ */
 public class AMDFactory implements ComponenteFactory {
+    /**
+     * Crea una CPU AMD según el modelo especificado.
+     *
+     * @param modelo Modelo de CPU deseado.
+     * @return Instancia de {@link AMDCPU}.
+     * @throws IllegalArgumentException si el modelo no es válido.
+     */
     @Override
     public CPU crearCPU(String modelo) {
         switch(modelo) {
@@ -15,11 +26,26 @@ public class AMDFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Lanza una excepción porque AMD no provee GPU en este sistema.
+     *
+     * @param modelo Modelo de GPU.
+     * @return Nunca retorna, siempre lanza excepción.
+     * @throws UnsupportedOperationException Indica que no se soporta esta operación.
+     */
     @Override
     public GPU crearGPU(String modelo) {
         throw new UnsupportedOperationException("AMD no provee GPUs en este sistema");
     }
     
+    /**
+     * Crea una RAM de Adata para AMD.
+     *
+     * @param modelo Modelo de RAM (ej. "16GB").
+     * @param cantidad No utilizado directamente.
+     * @return Instancia de {@link AdataRAM}.
+     * @throws IllegalArgumentException si el modelo no es válido.
+     */
     @Override
     public RAM crearRAM(String modelo, int cantidad) {
         switch (modelo) {
@@ -32,6 +58,13 @@ public class AMDFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Crea un disco de almacenamiento para AMD.
+     *
+     * @param modelo Modelo del disco.
+     * @return Instancia de {@link SSD}.
+     * @throws IllegalArgumentException si el modelo no es válido.
+     */
     @Override
     public Disco crearDisco(String modelo) {
         switch (modelo) {
@@ -42,11 +75,24 @@ public class AMDFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Crea una fuente de poder genérica para AMD.
+     *
+     * @param modelo Modelo de fuente.
+     * @return Instancia de {@link EVGAFuentePoder}.
+     */
     @Override
     public FuentePoder crearFuentePoder(String modelo) {
         return new EVGAFuentePoder("EVGA 600W", 50, 600, "80+ Bronze");
     }
 
+    /**
+     * Crea una motherboard ASUS compatible con AMD.
+     *
+     * @param modelo Modelo de motherboard.
+     * @return Instancia de {@link ASUSMotherboard}.
+     * @throws IllegalArgumentException si el modelo no es válido.
+     */
     @Override
     public Motherboard crearMotherboard(String modelo) {
         switch (modelo) {
@@ -57,6 +103,12 @@ public class AMDFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Crea un gabinete para la computadora.
+     *
+     * @param modelo Modelo del gabinete.
+     * @return Instancia de {@link NZXTGabinete}.
+     */
     @Override
     public Gabinete crearGabinete(String modelo) {
         return new NZXTGabinete("NZXT H510", 70, "ATX", true);

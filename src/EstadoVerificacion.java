@@ -1,4 +1,14 @@
+/**
+ * Estado en el que se realiza la verificación técnica de la computadora.
+ * Comprueba compatibilidad, requisitos mínimos y balance del sistema.
+ */
 public class EstadoVerificacion implements EstadoEnvio {
+
+    /**
+     * Procesa el pedido realizando las verificaciones técnicas.
+     *
+     * @param pedido Pedido a verificar.
+     */
     @Override
     public void procesarEstado(Pedido pedido) {
         System.out.println("\n=== VERIFICACIÓN TÉCNICA ===");
@@ -26,18 +36,31 @@ public class EstadoVerificacion implements EstadoEnvio {
         }
     }
 
+    /**
+     * Devuelve la descripción textual de este estado.
+     *
+     * @return una cadena que representa este estado.
+     */
     @Override
     public String getDescripcionEstado() {
         return "Verificación técnica de componentes";
     }
 
+    /**
+     * Proporciona instrucciones al cliente sobre el seguimiento en esta etapa.
+     *
+     * @return mensaje con instrucciones de seguimiento.
+     */
     @Override
     public String getInstruccionesSeguimiento() {
         return "Los componentes están siendo verificados para garantizar compatibilidad y rendimiento";
     }
 
-    // ========== MÉTODOS PRIVADOS ==========
-    
+    /**
+     * Verifica la compatibilidad entre CPU, motherboard y RAM.
+     *
+     * @param comp Computadora a verificar.
+     */    
     private void verificarCompatibilidad(Computadora comp) {
         System.out.println("\n[1/4] Verificando compatibilidad...");
         
@@ -59,6 +82,11 @@ public class EstadoVerificacion implements EstadoEnvio {
         }
     }
     
+    /**
+     * Verifica que la computadora cumpla con los requisitos mínimos operativos.
+     * 
+     * @param comp Computadora a verificar.
+     */
     private void verificarRequisitos(Computadora comp) {
         System.out.println("\n[2/4] Verificando requisitos...");
         
@@ -74,6 +102,11 @@ public class EstadoVerificacion implements EstadoEnvio {
         }
     }
     
+    /**
+     * Verifica si hay un balance razonable entre CPU y GPU para evitar cuellos de botella.
+     *
+     * @param comp Computadora a verificar.
+     */
     private void verificarBalance(Computadora comp) {
         System.out.println("\n[3/4] Verificando balance...");
         
@@ -89,6 +122,11 @@ public class EstadoVerificacion implements EstadoEnvio {
         }
     }
     
+    /**
+     * Muestra un resumen completo de los componentes seleccionados en la computadora.
+     *
+     * @param comp Computadora a mostrar.
+     */
     private void mostrarResumen(Computadora comp) {
         System.out.println("\n[4/4] Resumen del sistema:");
         System.out.println("- CPU: " + (comp.getCpu() != null ? comp.getCpu().getDescripcion() : "N/A"));

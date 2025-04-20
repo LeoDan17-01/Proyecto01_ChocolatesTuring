@@ -1,4 +1,16 @@
+/**
+ * Fábrica concreta que crea componentes de la combinación Intel + Nvidia.
+ * Implementa la interfaz ComponenteFactory.
+ */
 public class IntelNvidiaFactory implements ComponenteFactory {
+
+    /**
+     * Crea una CPU Intel según el modelo solicitado.
+     *
+     * @param modelo Modelo de CPU a crear (por ejemplo, "i7-13700K").
+     * @return Instancia de IntelCPU.
+     * @throws IllegalArgumentException Si el modelo no es reconocido.
+     */
     @Override
     public CPU crearCPU(String modelo) {
         switch(modelo) {
@@ -15,6 +27,13 @@ public class IntelNvidiaFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Crea una tarjeta gráfica Nvidia según el modelo solicitado.
+     *
+     * @param modelo Modelo de GPU (por ejemplo, "RTX 3060").
+     * @return Instancia de NvidiaGPU.
+     * @throws IllegalArgumentException Si el modelo no es válido.
+     */
     @Override
     public GPU crearGPU(String modelo) {
         switch(modelo) {
@@ -27,6 +46,14 @@ public class IntelNvidiaFactory implements ComponenteFactory {
         }
     }
     
+    /**
+     * Crea una memoria RAM ADATA con las características solicitadas.
+     *
+     * @param modelo   Modelo de RAM (por ejemplo, "16GB").
+     * @param cantidad Cantidad no usada en esta implementación.
+     * @return Instancia de AdataRAM.
+     * @throws IllegalArgumentException Si el modelo no es válido.
+     */
     @Override
     public RAM crearRAM(String modelo, int cantidad) {
         switch (modelo) {
@@ -39,6 +66,13 @@ public class IntelNvidiaFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Crea un disco SSD Samsung de acuerdo al modelo proporcionado.
+     *
+     * @param modelo Modelo de disco (ej. "500GB").
+     * @return Instancia de SSD.
+     * @throws IllegalArgumentException Si el modelo no es válido.
+     */
     @Override
     public Disco crearDisco(String modelo) {
         switch (modelo) {
@@ -51,6 +85,12 @@ public class IntelNvidiaFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Crea una fuente de poder predeterminada EVGA de 600W.
+     *
+     * @param modelo Ignorado en esta implementación.
+     * @return Instancia de EVGAFuentePoder.
+     */
     @Override
     public FuentePoder crearFuentePoder(String modelo) {
         switch (modelo) {
@@ -63,6 +103,13 @@ public class IntelNvidiaFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Crea una motherboard ASUS compatible con Intel.
+     *
+     * @param modelo Modelo de motherboard (ej. "Z590").
+     * @return Instancia de ASUSMotherboard.
+     * @throws IllegalArgumentException Si el modelo no es válido.
+     */
     @Override
     public Motherboard crearMotherboard(String modelo) {
         switch (modelo) {
@@ -75,6 +122,12 @@ public class IntelNvidiaFactory implements ComponenteFactory {
         }
     }
 
+    /**
+     * Crea un gabinete predeterminado NZXT H510.
+     *
+     * @param modelo Ignorado en esta implementación.
+     * @return Instancia de NZXTGabinete.
+     */
     @Override
     public Gabinete crearGabinete(String modelo) {
         switch (modelo) {

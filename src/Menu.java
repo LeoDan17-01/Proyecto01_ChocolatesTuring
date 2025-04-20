@@ -2,11 +2,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Clase que representa el menú principal de la aplicación PC Builder.
+ * Permite al usuario elegir entre computadoras prearmadas, personalizadas,
+ * ver sus pedidos o salir del sistema.
+ */
 public class Menu {
     private EnsamblajeContext ensamblaje;
     private List<Pedido> pedidos;
     private Scanner scanner;
 
+    /**
+     * Constructor del menú.
+     * Inicializa el ensamblaje, la lista de pedidos y lanza el menú principal.
+     */
     public Menu() {
         this.scanner = new Scanner(System.in);
         this.pedidos = new ArrayList<>();
@@ -14,6 +23,10 @@ public class Menu {
         inicializarMenu();
     }
 
+    /**
+     * Muestra el menú principal y gestiona la interacción con el usuario.
+     * El usuario puede seleccionar entre diferentes modos de compra.
+     */
     private void inicializarMenu() {
         boolean seguirComprando = true;
         System.out.println("-----------------------------------------------------------");
@@ -55,6 +68,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Permite al usuario seleccionar todos los componentes necesarios para armar una computadora.
+     * Incluye CPU, RAM, GPU, disco, fuente de poder, motherboard y gabinete.
+     */
     private void seleccionarComponentes() {
         System.out.println("\n--- Selección de Componentes ---");
 
@@ -154,6 +171,10 @@ public class Menu {
         scanner.nextLine(); // Limpiar buffer
     }
 
+    /**
+     * Permite al usuario agregar software adicional opcional.
+     * Muestra un submenú con productos como Windows, Office y Photoshop.
+     */
     private void agregarSoftwareOpcional() {
         System.out.println("\n--- Software Adicional ---");
         System.out.println("¿Desea agregar software? (S/N)");
@@ -192,6 +213,10 @@ public class Menu {
         }
     }
 
+    /**
+     * Finaliza el flujo de compra solicitando dirección y generando el pedido.
+     * El pedido se agrega a la lista y se muestra el total.
+     */
     private void flujoFinal() {
         System.out.print("\nIngrese la dirección de entrega: ");
         String direccion = scanner.nextLine();
@@ -205,6 +230,10 @@ public class Menu {
         System.out.println("Total: $" + pedido.getComputadora().calcularPrecioTotal());
     }
 
+    /**
+     * Muestra un resumen de todos los pedidos realizados hasta el momento.
+     * Incluye ID, fecha, estado, precio y dirección de entrega.
+     */
     private void mostrarResumenPedido() {
         System.out.println("\n--- Resumen de Pedidos ---");
         if (pedidos.isEmpty()) {

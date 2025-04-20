@@ -1,6 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa el contexto del proceso de ensamblaje de una computadora.
+ * 
+ * Gestiona el estado actual del ensamblaje, los componentes seleccionados,
+ * el tipo de ensamblaje (prearmado o personalizado), y la información del pedido.
+ */
 public class EnsamblajeContext {
     private EnsamblajeEstado estado;
     private ComputadoraBuilder builder;
@@ -10,6 +16,11 @@ public class EnsamblajeContext {
     private List<SoftwareAdicional> softwareAdicional;
     private ComponenteFactory factory;
 
+    /**
+     * Crea un nuevo contexto de ensamblaje con una sucursal específica.
+     * 
+     * @param sucursalActual Sucursal donde se está armando la computadora.
+     */
     public EnsamblajeContext(String sucursalActual) {
         this.estado = new SeleccionTipoEstado();
         this.builder = new ComputadoraBuilder();
@@ -19,15 +30,20 @@ public class EnsamblajeContext {
         this.esPrearmado = false;
     }
 
+    /**
+     * Procesa el estado actual del ensamblaje.
+     */
     public void procesar() {
         estado.procesar(this);
     }
 
+    /**
+     * Configura una computadora con componentes predefinidos (prearmado).
+     */
     public void manejarPrearmado() {
         this.esPrearmado = true;
         this.factory = new IntelNvidiaFactory();
         
-        // Configuración prearmada básica
         builder.agregarCPU(factory.crearCPU("i5-13600K"))
               .agregarRAM(factory.crearRAM("16GB", 1))
               .agregarGPU(factory.crearGPU("RTX 3060"))
@@ -37,48 +53,94 @@ public class EnsamblajeContext {
               .agregarGabinete(factory.crearGabinete("NZXT H510"));
     }
 
+    /**
+     * Inicia el modo de configuración personalizada de componentes.
+     */
     public void iniciarPersonalizado() {
         this.esPrearmado = false;
         this.builder = new ComputadoraBuilder();
         this.estado = new EstadoSeleccionComponentes();
     }
 
-    // Métodos para agregar componentes
+    /**
+     * Agrega una CPU al ensamblaje actual.
+     *
+     * @param cpu la CPU que se desea agregar al sistema.
+     */
     public void agregarCPU(CPU cpu) {
         builder.agregarCPU(cpu);
     }
 
+    /**
+     * Agrega una memoria RAM al ensamblaje actual.
+     *
+     * @param ram módulo de memoria RAM a agregar.
+     */
     public void agregarRAM(RAM ram) {
         builder.agregarRAM(ram);
     }
 
+    /**
+     * Agrega una tarjeta gráfica (GPU) al ensamblaje actual.
+     *
+     * @param gpu tarjeta gráfica a agregar.
+     */
     public void agregarGPU(GPU gpu) {
         builder.agregarGPU(gpu);
     }
 
+    /**
+     * Agrega un disco de almacenamiento (HDD o SSD) al ensamblaje actual.
+     *
+     * @param disco unidad de almacenamiento a agregar.
+     */
     public void agregarDisco(Disco disco) {
         builder.agregarDisco(disco);
     }
 
+    /**
+     * Agrega una fuente de poder al ensamblaje actual.
+     *
+     * @param fuente fuente de poder a agregar.
+     */
     public void agregarFuentePoder(FuentePoder fuente) {
         builder.agregarFuentePoder(fuente);
     }
 
+    /**
+     * Agrega una placa madre (motherboard) al ensamblaje actual.
+     *
+     * @param motherboard la motherboard a agregar.
+     */
     public void agregarMotherboard(Motherboard motherboard) {
         builder.agregarMotherboard(motherboard);
     }
 
+    /**
+     * Agrega un gabinete al ensamblaje actual.
+     *
+     * @param gabinete el gabinete a instalar.
+     */
     public void agregarGabinete(Gabinete gabinete) {
         builder.agregarGabinete(gabinete);
     }
 
-    // Métodos para software
+    /**
+     * Agrega software adicional al pedido si no ha sido agregado antes.
+     *
+     * @param software Software a agregar.
+     */
     public void agregarSoftware(SoftwareAdicional software) {
         if (!softwareAdicional.contains(software)) {
             softwareAdicional.add(software);
         }
     }
 
+    /**
+     * Crea un objeto Pedido a partir de la configuración actual de la computadora.
+     *
+     * @return El pedido generado.
+     */
     public Pedido crearPedido() {
         Computadora computadora = builder.build();
         computadora.setSoftware(softwareAdicional);
@@ -90,20 +152,89 @@ public class EnsamblajeContext {
         );
     }
 
-    // Getters y Setters
+    /**
+     * Obtiene el estado actual del proceso de ensamblaje.
+     *
+     * @return el estado actual del ensamblaje.
+     */
     public EnsamblajeEstado getEstado() { return estado; }
+
+    /**
+     * Cambia el estado actual del ensamblaje.
+     *
+     * @param estado nuevo estado a establecer.
+     */
     public void setEstado(EnsamblajeEstado estado) { this.estado = estado; }
+
+    /**
+     * Indica si el ensamblaje actual es un prearmado.
+     *
+     * @return true si es prearmado, false si es personalizado.
+     */
     public boolean isEsPrearmado() { return esPrearmado; }
+
+    /**
+     * Define si el ensamblaje es de tipo prearmado o personalizado.
+     *
+     * @param esPrearmado true si es prearmado, false si es personalizado.
+     */
     public void setEsPrearmado(boolean esPrearmado) { this.esPrearmado = esPrearmado; }
+
+    /**
+     * Obtiene la dirección de entrega asociada al pedido.
+     *
+     * @return la dirección donde se enviará la computadora.
+     */
     public String getDireccionEntrega() { return direccionEntrega; }
+
+    /**
+     * Establece la dirección de entrega del pedido.
+     *
+     * @param direccionEntrega dirección física para enviar la computadora.
+     */
     public void setDireccionEntrega(String direccionEntrega) { this.direccionEntrega = direccionEntrega; }
+
+    /**
+     * Obtiene el nombre de la sucursal actual donde se ensambla la computadora.
+     *
+     * @return nombre de la sucursal (ej: "CDMX").
+     */
     public String getSucursalActual() { return sucursalActual; }
+
+    /**
+     * Devuelve el builder interno utilizado para construir la computadora.
+     *
+     * @return instancia del ComputadoraBuilder.
+     */
     public ComputadoraBuilder getBuilder() { return builder; }
+
+    /**
+     * Devuelve la lista de software adicional seleccionado por el usuario.
+     *
+     * @return lista de software agregado.
+     */
     public List<SoftwareAdicional> getSoftwareAdicional() { return softwareAdicional; }
+
+    /**
+     * Cambia la fábrica de componentes utilizada durante el ensamblaje.
+     *
+     * @param factory nueva fábrica a usar (ej: AMDFactory, IntelNvidiaFactory).
+     */
+
     public void setFactory(ComponenteFactory factory) { this.factory = factory; }
+
+    /**
+     * Devuelve la fábrica de componentes actual (AMD, Intel, etc).
+     *
+     * @return la fábrica activa utilizada para crear componentes.
+     */
     public ComponenteFactory getFactory() { return this.factory; }
     
-    // Método para verificar compatibilidad
+    /**
+     * Verifica la compatibilidad básica entre CPU, motherboard y RAM.
+     *
+     * @return true si todos los componentes son compatibles, false si hay conflicto.
+     */
     public boolean verificarCompatibilidad() {
         Computadora comp = builder.build();
         
@@ -127,7 +258,13 @@ public class EnsamblajeContext {
         return true;
     }
     
-    // Método para adaptar componentes incompatibles
+    /**
+     * Adapta un componente incompatible a uno equivalente.
+     * Actualmente solo convierte AMDCPU a IntelCPU.
+     *
+     * @param componente Componente original.
+     * @return Componente adaptado o el mismo si no aplica.
+     */
     public Componente adaptarComponente(Componente componente) {
         if (componente instanceof AMDCPU) {
             AMDCPU amdCpu = (AMDCPU) componente;

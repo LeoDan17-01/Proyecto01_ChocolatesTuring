@@ -1,17 +1,27 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controlador principal encargado de gestionar el proceso de ensamblaje de computadoras.
+ * Interactúa con la vista y el contexto de ensamblaje, permitiendo tanto prearmados como configuraciones personalizadas.
+ */
 public class ControladorEnsamblaje {
     private VistaTerminal vista;
     private EnsamblajeContext ensamblaje;
     private List<Pedido> pedidos;
     
+    /**
+     * Constructor por defecto. Inicializa la vista, lista de pedidos y el contexto de ensamblaje.
+     */
     public ControladorEnsamblaje() {
         this.vista = new VistaTerminal();
         this.pedidos = new ArrayList<>();
         this.ensamblaje = new EnsamblajeContext("CDMX");
     }
-    
+
+    /**
+     * Inicia el ciclo principal del sistema, mostrando el menú y manejando las opciones del usuario.
+     */
     public void iniciar() {
         boolean seguirComprando = true;
         
@@ -39,11 +49,17 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Maneja el proceso de selección de una computadora prearmada.
+     */
     private void manejarPrearmado() {
         ensamblaje.manejarPrearmado();
         finalizarPedido();
     }
     
+    /**
+     * Maneja el proceso de ensamblaje personalizado de una computadora.
+     */
     private void manejarPersonalizado() {
         ensamblaje.iniciarPersonalizado();
         seleccionarComponentes();
@@ -51,6 +67,9 @@ public class ControladorEnsamblaje {
         finalizarPedido();
     }
     
+    /**
+     * Invoca los métodos necesarios para seleccionar todos los componentes.
+     */
     private void seleccionarComponentes() {
         seleccionarCPU();
         seleccionarRAM();
@@ -61,6 +80,11 @@ public class ControladorEnsamblaje {
         seleccionarGabinete();
     }
     
+    /**
+     * Permite al usuario seleccionar una CPU desde la vista.
+     * Las opciones se limitan a modelos Intel.
+     * Agrega la CPU seleccionada al contexto de ensamblaje.
+     */
     private void seleccionarCPU() {
         vista.mostrarMenuCPU();
         int opcion = vista.leerOpcion();
@@ -88,6 +112,10 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Permite al usuario seleccionar una memoria RAM desde la vista.
+     * Agrega el módulo RAM seleccionado al contexto de ensamblaje.
+     */
     private void seleccionarRAM() {
         vista.mostrarMenuRAM();
         int opcion = vista.leerOpcion();
@@ -112,6 +140,10 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Permite al usuario seleccionar una tarjeta gráfica (GPU).
+     * Agrega la GPU seleccionada al contexto de ensamblaje.
+     */
     private void seleccionarGPU() {
         vista.mostrarMenuGPU();
         int opcion = vista.leerOpcion();
@@ -136,6 +168,10 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Permite al usuario seleccionar un disco de almacenamiento (SSD).
+     * Agrega el disco seleccionado al contexto de ensamblaje.
+     */
     private void seleccionarDisco() {
         vista.mostrarMenuDisco();
         int opcion = vista.leerOpcion();
@@ -160,6 +196,10 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Permite al usuario seleccionar una fuente de poder.
+     * Agrega la fuente seleccionada al contexto de ensamblaje.
+     */
     private void seleccionarFuente() {
         vista.mostrarMenuFuente();
         int opcion = vista.leerOpcion();
@@ -184,6 +224,10 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Permite al usuario seleccionar una motherboard.
+     * Agrega la placa madre seleccionada al contexto de ensamblaje.
+     */
     private void seleccionarMotherboard() {
         vista.mostrarMenuMotherboard();
         int opcion = vista.leerOpcion();
@@ -208,6 +252,10 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Permite al usuario seleccionar un gabinete.
+     * Agrega el gabinete seleccionado al contexto de ensamblaje.
+     */
     private void seleccionarGabinete() {
         vista.mostrarMenuGabinete();
         int opcion = vista.leerOpcion();
@@ -232,6 +280,12 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Pregunta al usuario si desea agregar software adicional a su computadora.
+     * 
+     * Si el usuario acepta, muestra un menú con opciones de software para agregar.
+     * El usuario puede seleccionar varios hasta que indique que ha terminado.
+     */
     private void agregarSoftwareOpcional() {
         vista.mostrarMensaje("\n--- Software Adicional ---");
         vista.mostrarMensaje("¿Desea agregar software? (S/N)");
@@ -269,6 +323,9 @@ public class ControladorEnsamblaje {
         }
     }
     
+    /**
+     * Finaliza el pedido actual, solicita dirección de entrega y lo registra.
+     */
     private void finalizarPedido() {
         String direccion = vista.leerDireccion();
         ensamblaje.setDireccionEntrega(direccion);
@@ -280,6 +337,9 @@ public class ControladorEnsamblaje {
         vista.mostrarResumenPedido(pedido);
     }
     
+    /**
+     * Muestra todos los pedidos realizados hasta el momento.
+     */
     private void mostrarResumenes() {
         vista.mostrarMensaje("\n--- Resumen de Pedidos ---");
         if (pedidos.isEmpty()) {

@@ -7,7 +7,8 @@ import java.time.LocalDate;
 public class Pedido {
     private String idPedido;
     private EstadoEnvio estadoActual;
-    private String sucursalDestino;
+    private Sucursal sucursalOrigen;
+    private Sucursal sucursalDestino;
     private String direccionEntrega;
     private Computadora computadora;
     private LocalDate fechaCreacion;
@@ -17,18 +18,21 @@ public class Pedido {
      * Crea un nuevo pedido con los datos iniciales.
      *
      * @param idPedido          ID único del pedido.
-     * @param sucursalDestino   Sucursal donde se realiza el pedido.
+     * @param sucursalOrigen   Sucursal de origen.
      * @param direccionEntrega  Dirección de entrega del pedido.
      * @param computadora       Computadora asociada al pedido.
      */
-    public Pedido(String idPedido, String sucursalDestino, String direccionEntrega, Computadora computadora) {
+    public Pedido(String idPedido,Sucursal sucursalOrigen, String direccionEntrega, Computadora computadora) {
         this.idPedido = idPedido;
         this.estadoActual = new EstadoProceso();
-        this.sucursalDestino = sucursalDestino;
+        this.sucursalOrigen = sucursalOrigen;
         this.direccionEntrega = direccionEntrega;
         this.computadora = computadora;
         this.fechaCreacion = LocalDate.now();
         this.precioTotal = computadora.calcularPrecioTotal();
+        if(!sucursalOrigen.isCentral()){
+            this.sucursalDestino = sucursalOrigen.getSucursales().stream().filter(Sucursal::isCentral).findFirst().orElseThrow();
+        }
     }
 
     /**
@@ -57,9 +61,18 @@ public class Pedido {
     }
 
     /**
+     * Devuelve la sucursal de origen del pedido.
+     *
+     * @return Nombre de la sucursal.
+     */
+    public Sucursal getSucursalOrigen(){
+        return sucursalOrigen;
+    }
+
+    /**
      * Devuelve la sucursal de destino del pedido.
      *
-     * @return Nombre de la sucursal (ej. "CDMX").
+     * @return Nombre de la sucursal.
      */
     public String getSucursalDestino() {
         return sucursalDestino;
@@ -128,14 +141,13 @@ public class Pedido {
     @Override
     public String toString() {
         return String.format(
-            "Pedido #%s [Estado: %s]%n" +
-            "Sucursal: %s%n" +
-            "Destino: %s%n" +
+            "Pedido #%s [Origen: %s, Destino: %s]%n" +
             "Total: $%.2f%n" +
-            "Fecha: %s",
-            idPedido, estadoActual.getDescripcionEstado(),
-            sucursalDestino, direccionEntrega,
-            precioTotal, fechaCreacion
-        );
+            "Fecha: %s%n" +
+            "Estado: %s",
+            idPedido, sucursalOrigen.getNombre(),
+            sucursalDestino != null ? sucursalDestino.getNombre(): "Local", fechaCreacion,
+            precioTotal, estadoActual.getDescripcionEstado());
+       
     }
 }

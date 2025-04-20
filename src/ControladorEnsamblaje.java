@@ -13,16 +13,38 @@ public class ControladorEnsamblaje {
     /**
      * Constructor por defecto. Inicializa la vista, lista de pedidos y el contexto de ensamblaje.
      */
-    public ControladorEnsamblaje() {
+    public ControladorEnsamblaje(String sucursalActual) {
         this.vista = new VistaTerminal();
         this.pedidos = new ArrayList<>();
-        this.ensamblaje = new EnsamblajeContext("CDMX");
+        this.ensamblaje = new EnsamblajeContext(sucursalActual);
+    }
+
+    public void selecionarSucursal(){
+        vista.mostrarMensaje("\n -- Selección de Sucursal --");
+        List<Sucursal> sucarsales = ensamblaje.getSucursales();
+
+        for(int i= 0; i < sucursales.size(); i++){
+            vista.mostrarMensaje((i + 1) + ". " + sucursales.get(i));
+
+        }
+
+        vista.mostrarMensaje("Seleccione su sucursal por favor : ");
+        int opcion = vista.leerOpcion() -1;
+
+        if(opcion >= 0 && opcion < sucursales.size()){
+            ensamblaje = new EnsamblajeContext(sucursales.get(opcion).getNombre);
+            vista.mostrarMensaje("Sucursal seleccionada: " + sucursales.get(opcion).getNOmbre());
+        }else{
+            vista.mostrarError("Opción inválida, usando CDMX por defecto");
+            ensamblaje = new EnsamblajeContext("CDMX");
+        }
     }
 
     /**
      * Inicia el ciclo principal del sistema, mostrando el menú y manejando las opciones del usuario.
      */
     public void iniciar() {
+        seleccionarSucursal();
         boolean seguirComprando = true;
         
         while (seguirComprando) {

@@ -32,6 +32,49 @@ public class VistaTerminal {
         System.out.print("Seleccione una opción: ");
     }
     
+    public void mostrarInfoSucursal(Sucursal sucursal){
+        System.out.println("\n ===== INFORMACIÓN DE SUCURSAL ====");
+        System.out.println("Nombre: " + sucursal.getNombre());
+        System.out.println("Dirección: " + sucursal.getDireccion());
+        System.out.println("Tipo: " + (sucursal.isCentral() ? "Central (CDMX)": "Regional"));
+    }
+
+    public static Distribuidor getInstance(){
+        if(instance == null){
+            instance = new Distribuidor();
+        }
+        return instance;
+    }
+
+    public void agregarSucursal(Sucursal sucursal){
+        sucursales.add(sucursal);
+    }
+
+    public void enviarPedidoACentral(Pedido pedido){
+        if(!pedido.getSucursalOrigen().isCentral()){
+            System.out.println("\n ==== DISTRIBUCIÓN DE PEDIDO ====");
+            System.out.println("Enviando pedido #" + pedido.getIdPedido());
+            System.out.println(" Desde: " + pedido.getSucursalOrigen().getNombre());
+            System.out.println(" Hacia: " + pedido.getSucursalDestino().getNombre());
+            System.out.println(" Pedido: " + pedido.getComputadora().getCpu().getNombre());
+            //Lógica adicional :(
+            System.out.println("Pedido en camino a la central.");
+        }
+    }
+    public void distribuirComponentes(Sucursal origen, Sucursal destino, Componente componente, int cantidad){
+        System.out.println("\n === DISTRIBUCIÓN DE COMPONENTES ===");
+        System.out.println("Componente: " + componente.getNombre());
+        System.out.println("Cantidad: " + cantidad);
+        System.out.println("Desde: " + origen.getNombre());
+        System.out.println("Hacia: " + destino.getNombre());
+        //Lógica de transferencia de inventario
+        origen.getInventario().agregarComponente(componente);
+        destino.getInventario().agregarComponente(componente);
+
+        System.out.println("Distribución completada exitosamente :) ");
+
+    }
+
     /**
      * Muestra el menú de selección de CPU.
      */
@@ -202,7 +245,7 @@ public class VistaTerminal {
      * @param mensaje Texto con la advertencia.
      */
     public void mostrarAdvertenciaCompatibilidad(String mensaje) {
-        System.out.println("⚠ Advertencia: " + mensaje);
+        System.out.println(" Advertencia: " + mensaje);
     }
     
     /**

@@ -11,6 +11,7 @@ public class EnsamblajeContext {
     private EnsamblajeEstado estado;
     private ComputadoraBuilder builder;
     private boolean esPrearmado;
+    private List<Sucursal> sucursales;
     private String sucursalActual;
     private String direccionEntrega;
     private List<SoftwareAdicional> softwareAdicional;
@@ -24,7 +25,9 @@ public class EnsamblajeContext {
     public EnsamblajeContext(String sucursalActual) {
         this.estado = new SeleccionTipoEstado();
         this.builder = new ComputadoraBuilder();
-        this.sucursalActual = sucursalActual;
+        this.sucursales = new ArrayList<>();
+        inicializarSucursales();
+        this.sucursalActual = obtenerSucursalPorNombre(nombreSucursal);
         this.softwareAdicional = new ArrayList<>();
         this.factory = new IntelNvidiaFactory();
         this.esPrearmado = false;
@@ -51,6 +54,22 @@ public class EnsamblajeContext {
               .agregarFuentePoder(factory.crearFuentePoder("600W"))
               .agregarMotherboard(factory.crearMotherboard("Z590"))
               .agregarGabinete(factory.crearGabinete("NZXT H510"));
+    }
+
+    public void inicializarSucursales(){
+        sucursales.add(new Sucursal("CDMX", "Av.Principal 321", true));
+        sucursales.add(new Sucursal("Chihuahua", "Calle Zacapa 87", false));
+        sucursales.add(new Sucursal("Jalisco", "Calle Prados del Nilo 75", false));
+        sucursales.add(new Sucursal("Yucatán", "Circuito Colinas 194B", false));
+
+    }
+
+    private Sucursal obtenerSucursalPorNombre(String nombre){
+        return sucursales.stream().filter(s -> s.getNombre().equalsIgnoreCase(nombre)).findFirst().orElseThrow(() -> new IllegalArgumentException("Sucursal no encontrada ;("));
+    }
+
+    public List<Sucursal> getSucursales(){
+        return sucursales;
     }
 
     /**
@@ -199,7 +218,7 @@ public class EnsamblajeContext {
      *
      * @return nombre de la sucursal (ej: "CDMX").
      */
-    public String getSucursalActual() { return sucursalActual; }
+    public Sucursal getSucursalActual() { return sucursalActual; }
 
     /**
      * Devuelve el builder interno utilizado para construir la computadora.

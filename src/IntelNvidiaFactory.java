@@ -37,10 +37,16 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public GPU crearGPU(String modelo) {
         switch(modelo) {
+            case "GTX 1660":
+                return new NvidiaGPU("NVIDIA GTX 1660", 2500, "GDDR6", 12);
             case "RTX 3060":
-                return new NvidiaGPU("RTX 3060", 6000, "GDDR6", 12);
+                return new NvidiaGPU("NVIDIA RTX 3060", 3000, "GDDR6", 16);
             case "RTX 4070":
-                return new NvidiaGPU("RTX 4070", 12000, "GDDR6X", 16);
+                return new NvidiaGPU("NVIDIA RTX 4070", 4500, "GDDR6", 18);
+            case "RTX 4080":
+                return new NvidiaGPU("NVIDIA RTX 4080", 6000, "GDDR6", 19);
+            case "RTX 4090":
+                return new NvidiaGPU("NVIDIA RTX 4090", 8000, "GDDR6", 20);
             default:
                 throw new IllegalArgumentException("Modelo de GPU NVIDIA no válido");
         }
@@ -57,10 +63,18 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public RAM crearRAM(String modelo, int cantidad) {
         switch (modelo) {
+            case "8GB":
+                return new AdataRAM("Adata 8GB", 800, 8, "DDR4", 3200);
             case "16GB":
-                return new AdataRAM("Adata 16GB", 100, 16, "DDR4", 3200);
+                return new AdataRAM("Adata 16GB", 1500, 16, "DDR4", 3200);
             case "32GB":
-                return new AdataRAM("Adata 32GB", 180, 32, "DDR4", 3200);
+                return new AdataRAM("Adata 32GB", 2800, 32, "DDR4", 3200);
+            case "8GB-K":
+                return new KingstonRAM("Kingston 8GB", 850, 8, "DDR4", 3200);
+            case "16GB-K":
+                return new KingstonRAM("Kingston 16GB", 1600, 16, "DDR4", 3200);
+            case "32GB-K":
+                return new KingstonRAM("Kingston 32GB", 3000, 32, "DDR4", 3200);
             default:
                 throw new IllegalArgumentException("Modelo de RAM Intel no válido");
         }
@@ -76,10 +90,22 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public Disco crearDisco(String modelo) {
         switch (modelo) {
-            case "500GB":
-                return new SSD("SSD 500GB", 60, "Samsung", 500, "NVMe");
-            case "1TB":
-                return new SSD("SSD 1TB", 100, "Samsung", 1000, "NVMe");
+            case "500GB-WDB":
+                return new WDBlueHDD("Western Digital Blue 500GB", 700, "Samsung", 500, "NVMe");
+            case "1TB-WDB":
+                return new WDBlueHDD("Western Digital Blue 1TB", 1000, "Samsung", 1000, "NVMe");
+            case "1TB-S":
+                return new SeagateHDD("Seagate Barracuda 1TB", 1100, "Samsung", 1000, "NVMe");
+            case "2TB-S":
+                return new SeagateHDD("Seagate Barracuda 2TB", 1600, "Samsung", 2000, "NVMe");
+            case "500GB-K":
+                return new KingstonSSD("Kingston SSD 500GB", 1200, "Samsung", 500, "NVMe");
+            case "1TB-K":
+                return new KingstonSSD("Kingston SSD 1TB", 1800, "Samsung", 1000, "NVMe");
+            case "2TB-K":
+                return new KingstonSSD("Kingston SSD 2TB", 2500, "Samsung", 2000, "NVMe");
+            case "3TB-K":
+                return new KingstonSSD("Kingston SSD 3TB", 4000, "Samsung", 3000, "NVMe");
             default:
                 throw new IllegalArgumentException("Modelo de Disco no válido");
         }
@@ -94,10 +120,24 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public FuentePoder crearFuentePoder(String modelo) {
         switch (modelo) {
-            case "600W":
-                return new EVGAFuentePoder("EVGA 600W", 50, 600, "80+ Bronze");
-            case "750W":
-                return new EVGAFuentePoder("EVGA 750W", 80, 750, "80+ Gold");
+            case "800W":
+                return new EVGAFuentePoder("EVGA 800W", 1000, 800, "80+ Bronze");
+            case "1000W":
+                return new EVGAFuentePoder("EVGA 750W", 1300, 1000, "80+ Gold");
+            case "1500W":
+                return new EVGAFuentePoder("EVGA 1500W", 1800, 1500, "80+ Gold");
+            case "800W-C":
+                return new CorsairFuentePoder("Corsair 800W", 1050, 800, "80+ Bronze");
+            case "1200W-C":
+                return new CorsairFuentePoder("Corsair 1200W", 1600, 1200, "80+ Gold");
+            case "1500W-C":
+                return new CorsairFuentePoder("Corsair 1500W", 1900, 1500, "80+ Gold");
+            case "500W-X":
+                return new XPGFuentePoder("XPG 700W", 1000, 500, "80+ Bronze");
+            case "700W-X":
+                return new XPGFuentePoder("XPG 900W", 1300, 700, "80+ Gold");
+            case "1000W-X":
+                return new XPGFuentePoder("XPG 1300W", 1900, 1000, "80+ Gold");
             default:
                 throw new IllegalArgumentException("Modelo de Fuente no válido");
         }
@@ -113,10 +153,14 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public Motherboard crearMotherboard(String modelo) {
         switch (modelo) {
-            case "Z590":
-                return new ASUSMotherboard("ASUS Z590", 250, "Z590", "LGA1200");
-            case "Z690":
-                return new ASUSMotherboard("ASUS Z690", 350, "Z690", "LGA1700");
+            case "Z790":
+                return new ASUSMotherboard("ASUS ROG Maximus Z790 Hero", 5000, "Z790", "LGA1200");
+            case "B760":
+                return new ASUSMotherboard("ASUS TUF Gaming B760-Plus WIFI D4", 3200, "B760", "LGA1700");
+            case "MEG":
+                return new MSIMotherboard("MSI MEG Godlike", 6000, "Z790", "LGA3000");
+            case "B760-MAG":
+                return new MSIMotherboard("MSI MAG B760 Tomahawk WIFI DDR4", 3500, "B760", "LGA1800");
             default:
                 throw new IllegalArgumentException("Modelo de Motherboard Intel no válido");
         }
@@ -131,10 +175,10 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public Gabinete crearGabinete(String modelo) {
         switch (modelo) {
-            case "NZXT H510":
-                return new NZXTGabinete("NZXT H510", 70, "ATX", true);
-            case "Lian Li O11":
-                return new NZXTGabinete("Lian Li O11", 150, "ATX", false);
+            case "NZXT":
+                return new NZXTGabinete("NZXT H6 Flow ATX", 2000, "ATX", true);
+            case "Yeyian":
+                return new YeyianGabinete("Yeyian Lancer ATX", 1800, "ATX", false);
             default:
                 throw new IllegalArgumentException("Modelo de Gabinete no válido");
         }

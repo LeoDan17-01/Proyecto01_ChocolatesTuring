@@ -1,0 +1,25 @@
+public class XPGFuentePoder extends FuentePoder {
+
+    /**
+     * Constructor de fuente de poder EVGA.
+     *
+     * @param nombre        Nombre del modelo.
+     * @param precio        Precio en moneda local.
+     * @param potenciaWatts Potencia en vatios.
+     * @param certificacion Certificación de eficiencia (ej. 80+ Bronze).
+     */
+    public XPGFuentePoder(String nombre, double precio, int potenciaWatts, String certificacion) {
+        super(nombre, precio, "XPG", potenciaWatts, certificacion);
+    }
+
+    /**
+     * Devuelve una descripción detallada de la fuente EVGA.
+     *
+     * @return descripción en texto plano.
+     */
+    @Override
+    public String getDescripcion() {
+        return String.format("Fuente XPG %s - %dW %s - $%.2f",
+               nombre, potenciaWatts, certificacion, precio);
+    }
+}

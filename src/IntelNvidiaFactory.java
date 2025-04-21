@@ -104,8 +104,8 @@ public class IntelNvidiaFactory implements ComponenteFactory {
                 return new KingstonSSD("Kingston SSD 1TB", 1800, "Samsung", 1000, "NVMe");
             case "2TB-K":
                 return new KingstonSSD("Kingston SSD 2TB", 2500, "Samsung", 2000, "NVMe");
-            case "3TB-K":
-                return new KingstonSSD("Kingston SSD 3TB", 4000, "Samsung", 3000, "NVMe");
+            case "4TB-K":
+                return new KingstonSSD("Kingston SSD 4TB", 4000, "Samsung", 4000, "NVMe");
             default:
                 throw new IllegalArgumentException("Modelo de Disco no válido");
         }

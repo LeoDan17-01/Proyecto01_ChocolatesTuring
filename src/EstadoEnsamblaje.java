@@ -1,7 +1,7 @@
 /**
- * Estado del proceso de envío en el que la computadora está siendo ensamblada.
+ * Estado del proceso de envio en el que la computadora esta siendo ensamblada.
  * 
- * Este estado representa el momento en que los técnicos están montando los componentes
+ * Este estado representa el momento en que los tecnicos estan montando los componentes
  * seleccionados por el cliente en la computadora.
  */
 public class EstadoEnsamblaje implements EstadoEnvio {
@@ -10,7 +10,7 @@ public class EstadoEnsamblaje implements EstadoEnvio {
      * Procesa el pedido en el estado de ensamblaje.
      * Simula el armado de la computadora y avanza al siguiente estado.
      *
-     * @param pedido El pedido que se está procesando.
+     * @param pedido El pedido que se esta procesando.
      */
     @Override
     public void procesarEstado(Pedido pedido) {
@@ -35,7 +35,7 @@ public class EstadoEnsamblaje implements EstadoEnvio {
     }
 
     /**
-     * Devuelve una descripción corta del estado actual.
+     * Devuelve una descripcion corta del estado actual.
      *
      * @return Texto descriptivo del estado "En ensamblaje".
      */

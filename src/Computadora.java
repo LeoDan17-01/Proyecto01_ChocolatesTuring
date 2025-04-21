@@ -2,7 +2,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * Representa una computadora armada con sus respectivos componentes y software adicional.
+ * Representa una computadora personalizada compuesta por diferentes componentes de hardware
+ * y software adicional, asi como su respectivo pedido de envio.
+ * 
+ * Esta clase forma parte del modelo dentro de una arquitectura MVC.
  */
 public class Computadora {
     private CPU cpu;
@@ -16,7 +19,15 @@ public class Computadora {
     private Pedido pedido;
 
     /**
-     * Constructor principal de Computadora.
+     * Crea una nueva instancia de una computadora con los componentes principales.
+     *
+     * @param cpu        Procesador seleccionado.
+     * @param rams       Lista de modulos de memoria RAM.
+     * @param gpu        Tarjeta grafica.
+     * @param discos     Lista de unidades de almacenamiento (HDD o SSD).
+     * @param fuente     Fuente de poder.
+     * @param motherboard Placa base utilizada.
+     * @param gabinete   Gabinete fisico de la computadora.
      */
     public Computadora(CPU cpu, List<RAM> rams, GPU gpu, List<Disco> discos,
                       FuentePoder fuente, Motherboard motherboard, Gabinete gabinete) {
@@ -30,42 +41,140 @@ public class Computadora {
         this.software = new ArrayList<>();
     }
 
-    // Getters y Setters
+    /**
+     * Obtiene el procesador actual de la computadora.
+     * 
+     * @return El objeto CPU asignado.
+     */
     public CPU getCpu() { return cpu; }
+
+    /**
+     * Asigna un nuevo procesador a la computadora.
+     * 
+     * @param cpu Objeto CPU que se desea instalar.
+     */
     public void setCpu(CPU cpu) { this.cpu = cpu; }
 
+    /**
+     * Obtiene la lista de modulos de memoria RAM instalados.
+     * 
+     * @return Lista de objetos RAM.
+     */
     public List<RAM> getRams() { return rams; }
+
+    /**
+     * Asigna una nueva lista de modulos de memoria RAM.
+     * 
+     * @param rams Lista de objetos RAM a instalar.
+     */
     public void setRams(List<RAM> rams) { this.rams = rams; }
 
+    /**
+     * Obtiene la tarjeta grafica instalada en la computadora.
+     * 
+     * @return Objeto GPU actual.
+     */
     public GPU getGpu() { return gpu; }
+
+    /**
+     * Establece una nueva tarjeta grafica.
+     * 
+     * @param gpu Objeto GPU a asignar.
+     */
     public void setGpu(GPU gpu) { this.gpu = gpu; }
 
+    /**
+     * Obtiene la lista de discos (SSD o HDD) instalados.
+     * 
+     * @return Lista de objetos Disco.
+     */
     public List<Disco> getDiscos() { return discos; }
+
+    /**
+     * Asigna una nueva lista de discos a la computadora.
+     * 
+     * @param discos Lista de objetos Disco.
+     */
     public void setDiscos(List<Disco> discos) { this.discos = discos; }
 
+    /**
+     * Obtiene la fuente de poder de la computadora.
+     * 
+     * @return Objeto FuentePoder actual.
+     */
     public FuentePoder getFuente() { return fuente; }
+
+    /**
+     * Establece una nueva fuente de poder.
+     * 
+     * @param fuente Objeto FuentePoder a instalar.
+     */
     public void setFuente(FuentePoder fuente) { this.fuente = fuente; }
 
+    /**
+     * Obtiene la motherboard instalada.
+     * 
+     * @return Objeto Motherboard.
+     */
     public Motherboard getMotherboard() { return motherboard; }
+
+    /**
+     * Establece una nueva motherboard.
+     * 
+     * @param motherboard Objeto Motherboard a instalar.
+     */
     public void setMotherboard(Motherboard motherboard) { this.motherboard = motherboard; }
 
+    /**
+     * Obtiene el gabinete de la computadora.
+     * 
+     * @return Objeto Gabinete actual.
+     */
     public Gabinete getGabinete() { return gabinete; }
+
+    /**
+     * Asigna un nuevo gabinete fisico.
+     * 
+     * @param gabinete Objeto Gabinete a instalar.
+     */
+
     public void setGabinete(Gabinete gabinete) { this.gabinete = gabinete; }
 
+    /**
+     * Obtiene la lista de software adicional instalado.
+     * 
+     * @return Lista de objetos SoftwareAdicional.
+     */
     public List<SoftwareAdicional> getSoftware() { return software; }
+
+    /**
+     * Establece la lista de software adicional.
+     * 
+     * @param software Lista de objetos SoftwareAdicional.
+     */
     public void setSoftware(List<SoftwareAdicional> software) { this.software = software; }
 
+    /**
+     * Obtiene el pedido asociado a esta computadora.
+     * 
+     * @return Objeto Pedido actual.
+     */
     public Pedido getPedido() { return pedido; }
+
+    /**
+     * Asigna un pedido a esta computadora.
+     * 
+     * @param pedido Objeto Pedido que representa la orden de compra.
+     */
     public void setPedido(Pedido pedido) { this.pedido = pedido; }
 
     /**
      * Crea un nuevo pedido asociado a esta computadora.
      *
      * @param nombreSucursal   Nombre de la sucursal destino.
-     * @param direccionEntrega Dirección de entrega.
+     * @param direccionEntrega Direccion de entrega.
      */
     public void crearPedido(String nombreSucursal, String direccionEntrega) {
-        // Buscar la sucursal real del Distribuidor
         Sucursal sucursal = Distribuidor.getInstance().getSucursales().stream()
             .filter(s -> s.getNombre().equalsIgnoreCase(nombreSucursal))
             .findFirst()
@@ -73,14 +182,16 @@ public class Computadora {
         
         this.pedido = new Pedido(
             "PED-" + System.currentTimeMillis(),
-            sucursal,  // Pasamos el objeto Sucursal, no el String
+            sucursal,  
             direccionEntrega,
             this
         );
     }
 
     /**
-     * Calcula el precio total de la computadora.
+     * Calcula el precio total de todos los componentes y software instalado.
+     *
+     * @return El precio final de la computadora.
      */
     public double calcularPrecioTotal() {
         double total = 0;
@@ -107,6 +218,11 @@ public class Computadora {
         return total;
     }
 
+    /**
+     * Retorna una descripcion breve de la computadora, incluyendo CPU y precio total.
+     *
+     * @return Descripcion resumida en formato String.
+     */
     @Override
     public String toString() {
         return "Computadora [CPU=" + cpu.getDescripcion() + 

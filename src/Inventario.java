@@ -16,9 +16,9 @@ public class Inventario {
     }
     
     /**
-     * Devuelve la única instancia de la clase {@code Inventario}.
+     * Devuelve la unica instancia de la clase Inventario.
      *
-     * @return instancia única de {@link Inventario}.
+     * @return instancia única de Inventario.
      */
     public static Inventario getInstance() {
         if (instance == null){
@@ -37,10 +37,10 @@ public class Inventario {
     }
 
     /**
-     * Obtiene un componente del inventario según su nombre.
+     * Obtiene un componente del inventario segun su nombre.
      *
      * @param nombre Nombre del componente a buscar.
-     * @return Componente correspondiente, o {@code null} si no se encuentra.
+     * @return Componente correspondiente, o null si no se encuentra.
      */
     public Componente obtenerComponente(String nombre) {
         return componentes.get(nombre);

@@ -1,10 +1,10 @@
 /**
- * Representa un módulo de memoria RAM de la marca Adata.
+ * Representa un modulo de memoria RAM de la marca Adata.
  */
 public class AdataRAM extends RAM {
 
      /**
-     * Crea una nueva instancia de AdataRAM con los parámetros especificados.
+     * Crea una nueva instancia de AdataRAM con los parametros especificados.
      *
      * @param nombre       Nombre del componente.
      * @param precio       Precio de la RAM.
@@ -17,9 +17,9 @@ public class AdataRAM extends RAM {
     }
 
     /**
-     * Devuelve una descripción detallada de la RAM Adata.
+     * Devuelve una descripcion detallada de la RAM Adata.
      *
-     * @return Cadena con la descripción.
+     * @return Cadena con la descripcion.
      */
     @Override
     public String getDescripcion() {

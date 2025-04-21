@@ -1,11 +1,11 @@
 /**
  * Estado inicial del proceso de ensamblaje, donde se selecciona
- * si el ensamblaje será pre-armado o personalizado.
+ * si el ensamblaje sera pre-armado o personalizado.
  */
 public class SeleccionTipoEstado implements EnsamblajeEstado {
 
     /**
-     * Procesa la selección de tipo de ensamblaje según la configuración actual.
+     * Procesa la seleccion de tipo de ensamblaje segun la configuracion actual.
      *
      * @param context Contexto del ensamblaje.
      */
@@ -22,9 +22,9 @@ public class SeleccionTipoEstado implements EnsamblajeEstado {
     }
 
     /**
-     * Devuelve la descripción del estado actual.
+     * Devuelve la descripcion del estado actual.
      *
-     * @return Descripción del estado.
+     * @return Descripcion del estado.
      */
     @Override
     public String getDescripcion() {

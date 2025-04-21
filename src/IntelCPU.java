@@ -9,7 +9,7 @@ public class IntelCPU extends CPU {
      *
      * @param nombre     Nombre del modelo (ej. "Core i7-13700K").
      * @param precio     Precio del procesador.
-     * @param numNucleos Número de núcleos.
+     * @param numNucleos Numero de nucleos.
      * @param socket     Tipo de socket compatible.
      */
     public IntelCPU(String nombre, double precio, int numNucleos, String socket) {
@@ -17,9 +17,9 @@ public class IntelCPU extends CPU {
     }
 
     /**
-     * Devuelve una descripción detallada del procesador Intel.
+     * Devuelve una descripcion detallada del procesador Intel.
      *
-     * @return descripción con modelo, núcleos y precio.
+     * @return descripcion con modelo, núcleos y precio.
      */
     @Override
     public String getDescripcion() {

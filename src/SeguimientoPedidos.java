@@ -20,7 +20,7 @@ public class SeguimientoPedidos {
     }
     
     /**
-     * Devuelve la instancia única de seguimiento.
+     * Devuelve la instancia unica de seguimiento.
      *
      * @return Instancia singleton.
      */
@@ -41,7 +41,7 @@ public class SeguimientoPedidos {
     }
     
     /**
-     * Consulta un pedido según su ID.
+     * Consulta un pedido segun su ID.
      *
      * @param idPedido ID del pedido.
      * @return Pedido encontrado o null.
@@ -51,7 +51,7 @@ public class SeguimientoPedidos {
     }
     
     /**
-     * Obtiene todos los pedidos realizados en una sucursal específica.
+     * Obtiene todos los pedidos realizados en una sucursal especifica.
      *
      * @param sucursal Nombre de la sucursal.
      * @return Lista de pedidos de esa sucursal.
@@ -67,7 +67,7 @@ public class SeguimientoPedidos {
     }
     
     /**
-     * Cambia el estado de un pedido específico.
+     * Cambia el estado de un pedido especifico.
      *
      * @param idPedido    ID del pedido.
      * @param nuevoEstado Nuevo estado a asignar.

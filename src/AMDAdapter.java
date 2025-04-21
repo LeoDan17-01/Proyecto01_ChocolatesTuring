@@ -5,7 +5,7 @@
 public class AMDAdapter implements Compatibilidad {
 
     /**
-     * Verifica si dos componentes son compatibles entre sí.
+     * Verifica si dos componentes son compatibles entre si.
      * En este caso, se considera que un AMDCPU no es compatible con una NvidiaGPU.
      *
      * @param componente1 Primer componente.
@@ -24,7 +24,7 @@ public class AMDAdapter implements Compatibilidad {
      * Adapta un componente AMD a su equivalente Intel.
      *
      * @param componente Componente a adaptar.
-     * @return Componente adaptado, o el mismo si no requiere adaptación.
+     * @return Componente adaptado, o el mismo si no requiere adaptacion.
      */
     @Override
     public Componente adaptarComponente(Componente componente) {
@@ -32,7 +32,7 @@ public class AMDAdapter implements Compatibilidad {
             AMDCPU amdCpu = (AMDCPU) componente;
             return new IntelCPU(
                 "Intel Equivalente",
-                amdCpu.getPrecio() * 1.1,  // Ahora funcionará
+                amdCpu.getPrecio() * 1.1,  
                 amdCpu.getNumNucleos(),
                 "LGA1200"
             );

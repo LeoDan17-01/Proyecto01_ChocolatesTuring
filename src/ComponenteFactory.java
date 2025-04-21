@@ -1,6 +1,6 @@
 /**
- * Interfaz que define los métodos para crear los distintos
- * componentes de una computadora mediante el patrón Abstract Factory.
+ * Interfaz que define los metodos para crear los distintos
+ * componentes de una computadora mediante el patron Abstract Factory.
  */
 public interface ComponenteFactory {
 

@@ -3,11 +3,11 @@
  */
 public class AMDCPU extends CPU {
     /**
-     * Crea una nueva CPU AMD con los parámetros especificados.
+     * Crea una nueva CPU AMD con los parametros especificados.
      *
      * @param nombre     Nombre del modelo.
      * @param precio     Precio de la CPU.
-     * @param numNucleos Número de núcleos del procesador.
+     * @param numNucleos Numero de nucleos del procesador.
      * @param socket     Tipo de socket compatible.
      */
     public AMDCPU(String nombre, double precio, int numNucleos, String socket) {
@@ -15,9 +15,9 @@ public class AMDCPU extends CPU {
     }
 
     /**
-     * Devuelve una descripción detallada de la CPU AMD.
+     * Devuelve una descripcion detallada de la CPU AMD.
      *
-     * @return Cadena con la descripción.
+     * @return Cadena con la descripcion.
      */
     @Override
     public String getDescripcion() {

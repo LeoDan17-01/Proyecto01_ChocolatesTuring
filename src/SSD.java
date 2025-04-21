@@ -1,5 +1,5 @@
 /**
- * Representa una unidad SSD (estado sólido).
+ * Representa una unidad SSD (estado solido).
  * Hereda de la clase Disco.
  */
 public class SSD extends Disco {
@@ -27,7 +27,7 @@ public class SSD extends Disco {
     public String getTipoInterfaz() { return tipoInterfaz; }
 
     /**
-     * Descripción detallada del disco SSD.
+     * Descripcion detallada del disco SSD.
      *
      * @return Cadena con los detalles del SSD.
      */

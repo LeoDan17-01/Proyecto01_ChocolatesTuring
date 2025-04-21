@@ -3,7 +3,7 @@ import java.util.List;
 
 /**
  * Controlador principal encargado de gestionar el proceso de ensamblaje de computadoras.
- * Interactúa con la vista y el contexto de ensamblaje, permitiendo tanto prearmados como configuraciones personalizadas.
+ * Interactua con la vista y el contexto de ensamblaje, permitiendo tanto prearmados como configuraciones personalizadas.
  */
 public class ControladorEnsamblaje {
     private VistaTerminal vista;
@@ -11,7 +11,9 @@ public class ControladorEnsamblaje {
     private List<Pedido> pedidos;
     
     /**
-     * Constructor por defecto. Inicializa la vista, lista de pedidos y el contexto de ensamblaje.
+     * Constructor del controlador. Inicializa la vista, la lista de pedidos y el contexto de ensamblaje.
+     *
+     * @param sucursalActual Nombre de la sucursal actual al iniciar el sistema.
      */
     public ControladorEnsamblaje(String sucursalActual) {
         this.vista = new VistaTerminal();
@@ -20,7 +22,8 @@ public class ControladorEnsamblaje {
     }
 
     /**
-     * Permite al usuario seleccionar la sucursal donde se realizará el ensamblaje
+     * Permite al usuario seleccionar una sucursal desde el menu.
+     * Si la seleccion es invalida, se asigna la sucursal "CDMX" por defecto.
      */
     public void seleccionarSucursal() {
         vista.mostrarMensaje("\n -- Selección de Sucursal --");
@@ -43,7 +46,8 @@ public class ControladorEnsamblaje {
     }
 
     /**
-     * Inicia el ciclo principal del sistema, mostrando el menú y manejando las opciones del usuario.
+     * Inicia el ciclo principal de interaccion con el usuario,
+     * mostrando el menu y procesando las distintas opciones.
      */
     public void iniciar() {
         seleccionarSucursal();
@@ -74,15 +78,58 @@ public class ControladorEnsamblaje {
     }
     
     /**
-     * Maneja el proceso de selección de una computadora prearmada.
+     * Maneja la logica cuando el usuario elige una computadora prearmada.
      */
     private void manejarPrearmado() {
-        ensamblaje.manejarPrearmado();
-        finalizarPedido();
+        vista.mostrarMensaje("\n--- Selección de PC Prearmada ---");
+        vista.mostrarMensaje("1. PC Gamer Básica (i5, 16GB RAM, RTX 3060, 500GB SSD)");
+        vista.mostrarMensaje("2. PC Profesional (i7, 32GB RAM, RTX 4070, 1TB SSD)");
+        vista.mostrarMensaje("3. PC Workstation (i9, 64GB RAM, RTX 4090, 2TB SSD)");
+
+        vista.mostrarMensaje("Seleccione una opción: ");
+        int opcion = vista.leerOpcion();
+
+        // Limpiar el ensamblaje anterior si hubiera
+        ensamblaje.reiniciar();
+
+        switch (opcion) {
+            case 1:
+                ensamblaje.agregarCPU(new IntelCPU("Core i5-13600K", 2500, 6, "LGA1700"));
+                ensamblaje.agregarRAM(new AdataRAM("ADATA 16GB", 100, 16, "DDR4", 3200));
+                ensamblaje.agregarGPU(new NvidiaGPU("RTX 3060", 6000, "GDDR6", 12));
+                ensamblaje.agregarDisco(new SSD("Samsung 500GB", 60, "Samsung", 500, "NVMe"));
+                ensamblaje.agregarFuentePoder(new EVGAFuentePoder("EVGA 600W", 50, 600, "80+ Bronze"));
+                ensamblaje.agregarMotherboard(new ASUSMotherboard("ASUS B560", 180, "B560", "LGA1700"));
+                ensamblaje.agregarGabinete(new NZXTGabinete("NZXT H510", 70, "ATX", true));
+                break;
+            case 2:
+                ensamblaje.agregarCPU(new IntelCPU("Core i7-13700K", 3500, 8, "LGA1700"));
+                ensamblaje.agregarRAM(new AdataRAM("ADATA 32GB", 180, 32, "DDR4", 3200));
+                ensamblaje.agregarGPU(new NvidiaGPU("RTX 4070", 12000, "GDDR6X", 16));
+                ensamblaje.agregarDisco(new SSD("Samsung 1TB", 100, "Samsung", 1000, "NVMe"));
+                ensamblaje.agregarFuentePoder(new EVGAFuentePoder("Corsair 750W", 80, 750, "80+ Gold"));
+                ensamblaje.agregarMotherboard(new ASUSMotherboard("ASUS Z690", 250, "Z690", "LGA1700"));
+                ensamblaje.agregarGabinete(new NZXTGabinete("Lian Li O11", 150, "ATX", false));
+                break;
+            case 3:
+                ensamblaje.agregarCPU(new IntelCPU("Core i9-13900K", 5000, 12, "LGA1700"));
+                ensamblaje.agregarRAM(new AdataRAM("ADATA 64GB", 300, 64, "DDR4", 3200));
+                ensamblaje.agregarGPU(new NvidiaGPU("RTX 4090", 25000, "GDDR6X", 24)); // asumido que la clase existe
+                ensamblaje.agregarDisco(new SSD("Samsung 2TB", 180, "Samsung", 2000, "NVMe"));
+                ensamblaje.agregarFuentePoder(new EVGAFuentePoder("Corsair 1000W", 120, 1000, "80+ Platinum"));
+                ensamblaje.agregarMotherboard(new ASUSMotherboard("ASUS Z790", 300, "Z790", "LGA1700"));
+                ensamblaje.agregarGabinete(new NZXTGabinete("Fractal Design Meshify 2", 200, "ATX", true));
+                break;
+            default:
+                vista.mostrarError("Opción inválida. No se seleccionó ninguna PC prearmada.");
+                return;
+        }
+
+            finalizarPedido();
     }
     
     /**
-     * Maneja el proceso de ensamblaje personalizado de una computadora.
+     * Maneja la logica del ensamblaje personalizado, permitiendo al usuario elegir cada componente.
      */
     private void manejarPersonalizado() {
         ensamblaje.iniciarPersonalizado();
@@ -92,7 +139,7 @@ public class ControladorEnsamblaje {
     }
     
     /**
-     * Invoca los métodos necesarios para seleccionar todos los componentes.
+     * Invoca los metodos correspondientes para seleccionar cada componente del sistema.
      */
     private void seleccionarComponentes() {
         seleccionarCPU();
@@ -105,9 +152,7 @@ public class ControladorEnsamblaje {
     }
     
     /**
-     * Permite al usuario seleccionar una CPU desde la vista.
-     * Las opciones se limitan a modelos Intel.
-     * Agrega la CPU seleccionada al contexto de ensamblaje.
+     * Muestra opciones de CPU y permite al usuario seleccionar una, que luego se agrega al ensamblaje.
      */
     private void seleccionarCPU() {
         vista.mostrarMenuCPU();
@@ -137,8 +182,7 @@ public class ControladorEnsamblaje {
     }
     
     /**
-     * Permite al usuario seleccionar una memoria RAM desde la vista.
-     * Agrega el módulo RAM seleccionado al contexto de ensamblaje.
+     * Muestra opciones de memoria RAM y permite al usuario seleccionar una o varias.
      */
     private void seleccionarRAM() {
         vista.mostrarMenuRAM();
@@ -165,8 +209,7 @@ public class ControladorEnsamblaje {
     }
     
     /**
-     * Permite al usuario seleccionar una tarjeta gráfica (GPU).
-     * Agrega la GPU seleccionada al contexto de ensamblaje.
+     * Muestra opciones de GPU (tarjeta grafica) y permite su seleccion.
      */
     private void seleccionarGPU() {
         vista.mostrarMenuGPU();
@@ -250,7 +293,7 @@ public class ControladorEnsamblaje {
     
     /**
      * Permite al usuario seleccionar una motherboard.
-     * Agrega la placa madre seleccionada al contexto de ensamblaje.
+     * Agrega la motherboard seleccionada al contexto de ensamblaje.
      */
     private void seleccionarMotherboard() {
         vista.mostrarMenuMotherboard();
@@ -307,7 +350,7 @@ public class ControladorEnsamblaje {
     /**
      * Pregunta al usuario si desea agregar software adicional a su computadora.
      * 
-     * Si el usuario acepta, muestra un menú con opciones de software para agregar.
+     * Si el usuario acepta, muestra un menu con opciones de software para agregar.
      * El usuario puede seleccionar varios hasta que indique que ha terminado.
      */
     private void agregarSoftwareOpcional() {

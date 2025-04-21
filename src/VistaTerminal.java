@@ -3,7 +3,7 @@ import java.util.List;
 
 /**
  * Clase que representa la vista de usuario basada en terminal (consola).
- * Proporciona métodos para mostrar mensajes, errores, leer entradas del usuario
+ * Proporciona metodos para mostrar mensajes, errores, leer entradas del usuario
  * y facilitar la interacción textual con el sistema.
  */
 public class VistaTerminal {
@@ -17,7 +17,7 @@ public class VistaTerminal {
     }
     
     /**
-     * Muestra el menú principal de la aplicación.
+     * Muestra el menu principal de la aplicacion.
      */
     public void mostrarMenuPrincipal() {
         System.out.println("\n-----------------------------------------------------------");
@@ -32,7 +32,7 @@ public class VistaTerminal {
     }
     
     /**
-     * Muestra información detallada de una sucursal.
+     * Muestra informacion detallada de una sucursal.
      * @param sucursal La sucursal a mostrar
      */
     public void mostrarInfoSucursal(Sucursal sucursal) {
@@ -43,80 +43,101 @@ public class VistaTerminal {
     }
 
     /**
-     * Muestra el menú de selección de CPU.
+     * Muestra el menu de seleccion de CPU.
      */
     public void mostrarMenuCPU() {
         System.out.println("\n=== SELECCIÓN DE CPU ===");
-        System.out.println("1. Intel Core i5-13600K");
-        System.out.println("2. Intel Core i7-13700K");
-        System.out.println("3. Intel Core i9-13900K");
-        System.out.println("4. AMD Ryzen 5 5600G");
-        System.out.println("5. AMD Ryzen 7 7700X");
+        System.out.println("1. Intel Core i3-13100K - $1200.00");
+        System.out.println("2. Intel Core i5-13600K - $2500.00");
+        System.out.println("3. Intel Core i7-13700K - $3500.00");
+        System.out.println("4. Intel Core i9-13900K - $5000.00");
         System.out.print("Seleccione CPU: ");
     }
     
     /**
-     * Muestra el menú para ingresar cantidad de RAM.
+     * Muestra el menu para ingresar cantidad de RAM.
      */
     public void mostrarMenuRAM() {
         System.out.println("\n=== SELECCIÓN DE RAM ===");
-        System.out.println("1. ADATA 16GB DDR4 3200MHz");
-        System.out.println("2. ADATA 32GB DDR4 3200MHz");
+        System.out.println("1. ADATA 8GB DDR4 3200MHz - $800.00");
+        System.out.println("2. ADATA 16GB DDR4 3200MHz - $1500.00");
+        System.out.println("3. ADATA 32GB DDR4 3200MHz - $2800.00");
+        System.out.println("4. Kingston 8GB DDR4 3200MHz - $850.00");
+        System.out.println("5. Kingston 16GB DDR4 3200MHz - $1600.00");
+        System.out.println("6. Kingston 32GB DDR4 3200MHz - $3000.00");
         System.out.print("Seleccione RAM: ");
     }
     
     /**
-     * Muestra el menú de selección de GPU.
+     * Muestra el menu de seleccion de GPU.
      */
     public void mostrarMenuGPU() {
         System.out.println("\n=== SELECCIÓN DE GPU ===");
-        System.out.println("1. NVIDIA RTX 3060");
-        System.out.println("2. NVIDIA RTX 4070");
+        System.out.println("1. NVIDIA GTX 1660 - $2500.00");
+        System.out.println("2. NVIDIA RTX 3060 - $3000.00");
+        System.out.println("3. NVIDIA RTX 4070 - $4500.00");
+        System.out.println("4. NVIDIA RTX 4080 - $6000.00");
+        System.out.println("5. NVIDIA RTX 4090 - $8000.00");
         System.out.print("Seleccione GPU: ");
     }
     
     /**
-     * Muestra el menú de selección de discos de almacenamiento.
+     * Muestra el menu de seleccion de discos de almacenamiento.
      */
     public void mostrarMenuDisco() {
         System.out.println("\n=== SELECCIÓN DE DISCO ===");
-        System.out.println("1. SSD 500GB");
-        System.out.println("2. SSD 1TB");
+        System.out.println("1. HDD Western Digital Blue 500GB - $700.00");
+        System.out.println("2. HDD Western Digital Blue 1TB - $1000.00");
+        System.out.println("3. HDD Seagate Barracuda 1TB - $1100.00");
+        System.out.println("4. HDD Seagate Barracuda 2TB - $1600.00");
+        System.out.println("5. SSD Kingston 500GB - $1200.00");
+        System.out.println("6. SSD Kingston 1TB - $1800.00");
+        System.out.println("7. SSD Kingston 2TB - $2500.00");
+        System.out.println("8. SSD Kingston 4TB - $4000.00");
         System.out.print("Seleccione disco: ");
     }
     
     /**
-     * Muestra el menú de selección de fuente de poder.
+     * Muestra el menu de seleccion de fuente de poder.
      */
     public void mostrarMenuFuente() {
         System.out.println("\n=== SELECCIÓN DE FUENTE ===");
-        System.out.println("1. EVGA 600W 80+ Bronze");
-        System.out.println("2. Corsair 750W 80+ Gold");
+        System.out.println("1. EVGA 800W 80+ Bronze - $1000.00");
+        System.out.println("2. EVGA 1000W 80+ Bronze - $1300.00");
+        System.out.println("3. EVGA 1500W 80+ Golde - $1800.00");
+        System.out.println("4. Corsair 800W 80+ Bronze - $1050.00");
+        System.out.println("5. Corsair 1200W 80+ Gold - $1600.00");
+        System.out.println("6. Corsair 1500W 80+ Gold - $1900.00");
+        System.out.println("7. XPG 500W 80+ Bronze - $1000.00");
+        System.out.println("8. XPG 900W 80+ Gold - $1300.00");
+        System.out.println("9. XPG 1300W 80+ Golde - $1900.00");
         System.out.print("Seleccione fuente: ");
     }
     
     /**
-     * Muestra el menú de selección de motherboard.
+     * Muestra el menu de seleccion de motherboard.
      */
     public void mostrarMenuMotherboard() {
         System.out.println("\n=== SELECCIÓN DE MOTHERBOARD ===");
-        System.out.println("1. ASUS Z590 (Intel)");
-        System.out.println("2. ASUS B550 (AMD)");
+        System.out.println("1. ASUS ROG Maximus Z790 Hero - $5000.00");
+        System.out.println("2. ASUS TUF Gaming B760-Plus WIFI D4 - $3200.00");
+        System.out.println("3. MSI MEG Godlike - $6000.00");
+        System.out.println("4. MSI MAG B760 Tomahawk WIFI DDR4 - $3500.00");
         System.out.print("Seleccione motherboard: ");
     }
     
     /**
-     * Muestra el menú de selección de gabinete.
+     * Muestra el menu de seleccion de gabinete.
      */
     public void mostrarMenuGabinete() {
         System.out.println("\n=== SELECCIÓN DE GABINETE ===");
-        System.out.println("1. NZXT H510");
-        System.out.println("2. Lian Li O11 Dynamic");
+        System.out.println("1. NZXT H6 Flow ATX - $2000.00");
+        System.out.println("2. Yeyian Lancer ATX - $1800.00");
         System.out.print("Seleccione gabinete: ");
     }
     
     /**
-     * Muestra el menú de selección de software adicional.
+     * Muestra el menu de seleccion de software adicional.
      */
     public void mostrarMenuSoftware() {
         System.out.println("\n=== SOFTWARE ADICIONAL ===");
@@ -128,8 +149,9 @@ public class VistaTerminal {
     }
     
     /**
-     * Lee una opción numérica del usuario.
-     * @return opción ingresada
+     * Lee una opcion numerica del usuario.
+     * 
+     * @return opcion ingresada
      */
     public int leerOpcion() {
         while (!scanner.hasNextInt()) {
@@ -142,16 +164,17 @@ public class VistaTerminal {
     }
     
     /**
-     * Lee una línea completa de entrada del usuario.
-     * @return línea ingresada como texto
+     * Lee una linea completa de entrada del usuario.
+     * 
+     * @return linea ingresada como texto
      */
     public String leerLinea() {
         return scanner.nextLine();
     }
     
     /**
-     * Solicita al usuario ingresar una dirección de entrega.
-     * @return dirección ingresada
+     * Solicita al usuario ingresar una direccion de entrega.
+     * @return direccion ingresada
      */
     public String leerDireccion() {
         System.out.print("\nIngrese la dirección de entrega: ");
@@ -159,7 +182,7 @@ public class VistaTerminal {
     }
     
     /**
-     * Solicita una confirmación (Sí/No) al usuario.
+     * Solicita una confirmacion (Si/No) al usuario.
      * @param mensaje Mensaje a mostrar
      * @return true si el usuario responde "S", false en caso contrario
      */
@@ -170,7 +193,8 @@ public class VistaTerminal {
     }
     
     /**
-     * Muestra un mensaje estándar en la consola.
+     * Muestra un mensaje estandar en la consola.
+     * 
      * @param mensaje Texto que se desea mostrar
      */
     public void mostrarMensaje(String mensaje) {
@@ -179,6 +203,7 @@ public class VistaTerminal {
     
     /**
      * Muestra un mensaje de error en consola.
+     * 
      * @param error Mensaje de error a mostrar
      */
     public void mostrarError(String error) {
@@ -186,8 +211,9 @@ public class VistaTerminal {
     }
     
     /**
-     * Muestra un mensaje de éxito al agregar un componente.
-     * @param descripcion Descripción del componente agregado
+     * Muestra un mensaje de exito al agregar un componente.
+     * 
+     * @param descripcion Descripcion del componente agregado
      */
     public void mostrarComponenteAgregado(String descripcion) {
         System.out.println("✓ " + descripcion);
@@ -195,6 +221,7 @@ public class VistaTerminal {
     
     /**
      * Muestra una advertencia de compatibilidad al usuario.
+     * 
      * @param mensaje Texto con la advertencia
      */
     public void mostrarAdvertenciaCompatibilidad(String mensaje) {
@@ -202,7 +229,8 @@ public class VistaTerminal {
     }
     
     /**
-     * Muestra el resumen de un pedido específico.
+     * Muestra el resumen de un pedido especifico.
+     * 
      * @param pedido Pedido a mostrar
      */
     public void mostrarResumenPedido(Pedido pedido) {
@@ -218,6 +246,7 @@ public class VistaTerminal {
     
     /**
      * Muestra una lista de todos los pedidos registrados.
+     * 
      * @param pedidos Lista de pedidos
      */
     public void mostrarListaPedidos(List<Pedido> pedidos) {
@@ -234,6 +263,7 @@ public class VistaTerminal {
     
     /**
      * Muestra en detalle los componentes de una computadora ensamblada.
+     * 
      * @param computadora Computadora a mostrar
      */
     public void mostrarDetallesComputadora(Computadora computadora) {
@@ -267,7 +297,7 @@ public class VistaTerminal {
     }
     
     /**
-     * Limpia la pantalla de la terminal (emulación básica).
+     * Limpia la pantalla de la terminal (emulacion basica).
      */
     public void limpiarPantalla() {
         System.out.print("\033[H\033[2J");
@@ -276,7 +306,7 @@ public class VistaTerminal {
     
     /**
      * Cierra el lector de consola.
-     * Debe llamarse antes de terminar la aplicación.
+     * Debe llamarse antes de terminar la aplicacion.
      */
     public void cerrar() {
         scanner.close();

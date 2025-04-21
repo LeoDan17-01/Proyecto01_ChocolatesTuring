@@ -1,5 +1,5 @@
 /**
- * Representa una tarjeta gráfica (GPU) de la marca NVIDIA.
+ * Representa una tarjeta grafica (GPU) de la marca NVIDIA.
  * Hereda de la clase abstracta GPU.
  */
 public class NvidiaGPU extends GPU {
@@ -17,9 +17,9 @@ public class NvidiaGPU extends GPU {
     }
 
     /**
-     * Devuelve una descripción completa de la GPU.
+     * Devuelve una descripcion completa de la GPU.
      *
-     * @return Descripción con nombre, memoria y precio.
+     * @return Descripcion con nombre, memoria y precio.
      */
     @Override
     public String getDescripcion() {

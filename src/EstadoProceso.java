@@ -1,11 +1,11 @@
 /**
- * Estado de envío en el que el pedido está siendo preparado para ensamblaje.
+ * Estado de envio en el que el pedido esta siendo preparado para ensamblaje.
  */
 public class EstadoProceso implements EstadoEnvio {
 
     /**
      * Procesa el pedido en el estado "En proceso".
-     * Muestra mensajes de preparación y cambia al estado de ensamblaje.
+     * Muestra mensajes de preparacion y cambia al estado de ensamblaje.
      *
      * @param pedido El pedido que se va a procesar.
      */
@@ -24,9 +24,9 @@ public class EstadoProceso implements EstadoEnvio {
     }
 
     /**
-     * Devuelve la descripción textual del estado actual.
+     * Devuelve la descripcion textual del estado actual.
      *
-     * @return Descripción del estado.
+     * @return Descripcion del estado.
      */
     @Override
     public String getDescripcionEstado() {

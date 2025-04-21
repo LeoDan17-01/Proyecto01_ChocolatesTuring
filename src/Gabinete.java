@@ -61,9 +61,9 @@ public abstract class Gabinete {
     public boolean isIncluyeVentiladores() { return incluyeVentiladores; }
 
     /**
-     * Retorna una descripción textual del gabinete.
+     * Retorna una descripcion textual del gabinete.
      *
-     * @return descripción detallada.
+     * @return descripcion detallada.
      */
     public abstract String getDescripcion();
 }

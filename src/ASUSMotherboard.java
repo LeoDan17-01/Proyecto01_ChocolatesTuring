@@ -16,9 +16,9 @@ public class ASUSMotherboard extends Motherboard {
     }
 
     /**
-     * Devuelve una descripción detallada de la motherboard ASUS.
+     * Devuelve una descripcion detallada de la motherboard ASUS.
      *
-     * @return Cadena con la descripción.
+     * @return Cadena con la descripcion.
      */
     @Override
     public String getDescripcion() {

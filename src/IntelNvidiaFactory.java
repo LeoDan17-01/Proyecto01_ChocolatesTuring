@@ -1,11 +1,11 @@
 /**
- * Fábrica concreta que crea componentes de la combinación Intel + Nvidia.
+ * Fabrica concreta que crea componentes de la combinacion Intel + Nvidia.
  * Implementa la interfaz ComponenteFactory.
  */
 public class IntelNvidiaFactory implements ComponenteFactory {
 
     /**
-     * Crea una CPU Intel según el modelo solicitado.
+     * Crea una CPU Intel segun el modelo solicitado.
      *
      * @param modelo Modelo de CPU a crear (por ejemplo, "i7-13700K").
      * @return Instancia de IntelCPU.
@@ -28,11 +28,11 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     }
 
     /**
-     * Crea una tarjeta gráfica Nvidia según el modelo solicitado.
+     * Crea una tarjeta grafica Nvidia segun el modelo solicitado.
      *
      * @param modelo Modelo de GPU (por ejemplo, "RTX 3060").
      * @return Instancia de NvidiaGPU.
-     * @throws IllegalArgumentException Si el modelo no es válido.
+     * @throws IllegalArgumentException Si el modelo no es valido.
      */
     @Override
     public GPU crearGPU(String modelo) {
@@ -53,12 +53,12 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     }
     
     /**
-     * Crea una memoria RAM ADATA con las características solicitadas.
+     * Crea una memoria RAM ADATA con las caracteristicas solicitadas.
      *
      * @param modelo   Modelo de RAM (por ejemplo, "16GB").
-     * @param cantidad Cantidad no usada en esta implementación.
+     * @param cantidad Cantidad no usada en esta implementacion.
      * @return Instancia de AdataRAM.
-     * @throws IllegalArgumentException Si el modelo no es válido.
+     * @throws IllegalArgumentException Si el modelo no es valido.
      */
     @Override
     public RAM crearRAM(String modelo, int cantidad) {
@@ -85,7 +85,7 @@ public class IntelNvidiaFactory implements ComponenteFactory {
      *
      * @param modelo Modelo de disco (ej. "500GB").
      * @return Instancia de SSD.
-     * @throws IllegalArgumentException Si el modelo no es válido.
+     * @throws IllegalArgumentException Si el modelo no es valido.
      */
     @Override
     public Disco crearDisco(String modelo) {
@@ -116,7 +116,7 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     /**
      * Crea una fuente de poder predeterminada EVGA de 600W.
      *
-     * @param modelo Ignorado en esta implementación.
+     * @param modelo Ignorado en esta implementacion.
      * @return Instancia de EVGAFuentePoder.
      */
     @Override
@@ -152,7 +152,7 @@ public class IntelNvidiaFactory implements ComponenteFactory {
      *
      * @param modelo Modelo de motherboard (ej. "Z590").
      * @return Instancia de ASUSMotherboard.
-     * @throws IllegalArgumentException Si el modelo no es válido.
+     * @throws IllegalArgumentException Si el modelo no es valido.
      */
     @Override
     public Motherboard crearMotherboard(String modelo) {
@@ -175,7 +175,7 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     /**
      * Crea un gabinete predeterminado NZXT H510.
      *
-     * @param modelo Ignorado en esta implementación.
+     * @param modelo Ignorado en esta implementacion.
      * @return Instancia de NZXTGabinete.
      */
     @Override

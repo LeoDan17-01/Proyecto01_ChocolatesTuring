@@ -1,14 +1,14 @@
 /**
- * Fábrica concreta para la creación de componentes AMD.
+ * Fabrica concreta para la creacion de componentes AMD.
  * Implementa la interfaz ComponenteFactory.
  */
 public class AMDFactory implements ComponenteFactory {
     /**
-     * Crea una CPU AMD según el modelo especificado.
+     * Crea una CPU AMD segun el modelo especificado.
      *
      * @param modelo Modelo de CPU deseado.
-     * @return Instancia de {@link AMDCPU}.
-     * @throws IllegalArgumentException si el modelo no es válido.
+     * @return Instancia de AMDCPU.
+     * @throws IllegalArgumentException si el modelo no es valido.
      */
     @Override
     public CPU crearCPU(String modelo) {
@@ -27,11 +27,11 @@ public class AMDFactory implements ComponenteFactory {
     }
 
     /**
-     * Lanza una excepción porque AMD no provee GPU en este sistema.
+     * Lanza una excepcion porque AMD no provee GPU en este sistema.
      *
      * @param modelo Modelo de GPU.
-     * @return Nunca retorna, siempre lanza excepción.
-     * @throws UnsupportedOperationException Indica que no se soporta esta operación.
+     * @return Nunca retorna, siempre lanza excepcion.
+     * @throws UnsupportedOperationException Indica que no se soporta esta operacion.
      */
     @Override
     public GPU crearGPU(String modelo) {
@@ -43,8 +43,8 @@ public class AMDFactory implements ComponenteFactory {
      *
      * @param modelo Modelo de RAM (ej. "16GB").
      * @param cantidad No utilizado directamente.
-     * @return Instancia de {@link AdataRAM}.
-     * @throws IllegalArgumentException si el modelo no es válido.
+     * @return Instancia de AdataRAM.
+     * @throws IllegalArgumentException si el modelo no es valido.
      */
     @Override
     public RAM crearRAM(String modelo, int cantidad) {
@@ -62,8 +62,8 @@ public class AMDFactory implements ComponenteFactory {
      * Crea un disco de almacenamiento para AMD.
      *
      * @param modelo Modelo del disco.
-     * @return Instancia de {@link SSD}.
-     * @throws IllegalArgumentException si el modelo no es válido.
+     * @return Instancia de SSD.
+     * @throws IllegalArgumentException si el modelo no es valido.
      */
     @Override
     public Disco crearDisco(String modelo) {
@@ -76,10 +76,10 @@ public class AMDFactory implements ComponenteFactory {
     }
 
     /**
-     * Crea una fuente de poder genérica para AMD.
+     * Crea una fuente de poder generica para AMD.
      *
      * @param modelo Modelo de fuente.
-     * @return Instancia de {@link EVGAFuentePoder}.
+     * @return Instancia de EVGAFuentePoder.
      */
     @Override
     public FuentePoder crearFuentePoder(String modelo) {
@@ -90,8 +90,8 @@ public class AMDFactory implements ComponenteFactory {
      * Crea una motherboard ASUS compatible con AMD.
      *
      * @param modelo Modelo de motherboard.
-     * @return Instancia de {@link ASUSMotherboard}.
-     * @throws IllegalArgumentException si el modelo no es válido.
+     * @return Instancia de ASUSMotherboard.
+     * @throws IllegalArgumentException si el modelo no es valido.
      */
     @Override
     public Motherboard crearMotherboard(String modelo) {
@@ -107,7 +107,7 @@ public class AMDFactory implements ComponenteFactory {
      * Crea un gabinete para la computadora.
      *
      * @param modelo Modelo del gabinete.
-     * @return Instancia de {@link NZXTGabinete}.
+     * @return Instancia de NZXTGabinete.
      */
     @Override
     public Gabinete crearGabinete(String modelo) {

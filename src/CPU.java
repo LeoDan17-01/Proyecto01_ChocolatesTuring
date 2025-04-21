@@ -11,7 +11,7 @@ public abstract class CPU extends Componente {
      * @param nombre     Nombre del modelo.
      * @param precio     Precio de la CPU.
      * @param marca      Marca del procesador.
-     * @param numNucleos Número de núcleos.
+     * @param numNucleos Numero de nucleos.
      * @param socket     Tipo de socket compatible.
      */
     public CPU(String nombre, double precio, String marca, int numNucleos, String socket) {
@@ -21,13 +21,15 @@ public abstract class CPU extends Componente {
     }
 
     /**
-     * Obtiene el número de núcleos.
-     * @return número de núcleos.
+     * Obtiene el numero de nucleos.
+     * 
+     * @return numero de nucleos.
      */
     public int getNumNucleos() { return numNucleos; }
 
     /**
      * Obtiene el tipo de socket.
+     * 
      * @return socket de la CPU.
      */
     public String getSocket() { return socket; }

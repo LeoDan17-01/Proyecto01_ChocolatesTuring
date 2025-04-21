@@ -17,9 +17,9 @@ public class NZXTGabinete extends Gabinete {
     }
 
     /**
-     * Devuelve una descripción completa del gabinete.
+     * Devuelve una descripcion completa del gabinete.
      *
-     * @return Descripción textual con detalles del modelo.
+     * @return Descripcion textual con detalles del modelo.
      */
     @Override
     public String getDescripcion() {

@@ -2,7 +2,7 @@ import java.time.LocalDate;
 
 /**
  * Representa un pedido realizado por el cliente.
- * Contiene la computadora ensamblada, dirección de entrega y estado del envío.
+ * Contiene la computadora ensamblada, direccion de entrega y estado del envio.
  */
 public class Pedido {
     private String idPedido;
@@ -17,9 +17,9 @@ public class Pedido {
     /**
      * Crea un nuevo pedido con los datos iniciales.
      *
-     * @param idPedido          ID único del pedido.
+     * @param idPedido          ID unico del pedido.
      * @param sucursalOrigen    Sucursal de origen.
-     * @param direccionEntrega  Dirección de entrega del pedido.
+     * @param direccionEntrega  Direccion de entrega del pedido.
      * @param computadora       Computadora asociada al pedido.
      */
     public Pedido(String idPedido, Sucursal sucursalOrigen, String direccionEntrega, Computadora computadora) {
@@ -50,7 +50,7 @@ public class Pedido {
     }
 
     /**
-     * Obtiene el ID único del pedido.
+     * Obtiene el ID unico del pedido.
      *
      * @return Identificador del pedido (ej. "PED-123456").
      */
@@ -59,9 +59,9 @@ public class Pedido {
     }
 
     /**
-     * Devuelve el estado actual del pedido dentro del proceso de envío.
+     * Devuelve el estado actual del pedido dentro del proceso de envio.
      *
-     * @return Estado actual como objeto {@link EstadoEnvio}.
+     * @return Estado actual como objeto EstadoEnvio.
      */
     public EstadoEnvio getEstadoActual() {
         return estadoActual;
@@ -86,9 +86,9 @@ public class Pedido {
     }
 
     /**
-     * Devuelve la dirección de entrega del pedido.
+     * Devuelve la direccion de entrega del pedido.
      *
-     * @return Dirección completa del cliente.
+     * @return Direccion completa del cliente.
      */
     public String getDireccionEntrega() {
         return direccionEntrega;
@@ -104,9 +104,9 @@ public class Pedido {
     }
 
     /**
-     * Obtiene la fecha en que se creó el pedido.
+     * Obtiene la fecha en que se creo el pedido.
      *
-     * @return Fecha de creación como LocalDate.
+     * @return Fecha de creacion como LocalDate.
      */
     public LocalDate getFechaCreacion() {
         return fechaCreacion;
@@ -132,9 +132,9 @@ public class Pedido {
     }
 
     /**
-     * Establece la dirección de entrega para el pedido.
+     * Establece la direccion de entrega para el pedido.
      *
-     * @param direccionEntrega Dirección completa donde se entregará la computadora.
+     * @param direccionEntrega Direccion completa donde se entregara la computadora.
      */
     public void setDireccionEntrega(String direccionEntrega) {
         this.direccionEntrega = direccionEntrega;
@@ -143,7 +143,7 @@ public class Pedido {
     /**
      * Devuelve el resumen textual del pedido.
      *
-     * @return Información completa del pedido.
+     * @return Informacion completa del pedido.
      */
     @Override
     public String toString() {

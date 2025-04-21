@@ -1,13 +1,13 @@
 /**
- * Clase principal que inicia la aplicación de ensamblaje de computadoras.
- * Lanza el flujo de interacción con el usuario a través del controlador.
+ * Clase principal que inicia la aplicacion de ensamblaje de computadoras.
+ * Lanza el flujo de interaccion con el usuario a traves del controlador.
  */
 public class Main {
 
     /**
-     * Método principal que se ejecuta al iniciar el programa.
+     * Metodo principal que se ejecuta al iniciar el programa.
      *
-     * @param args Argumentos de línea de comandos (no utilizados).
+     * @param args Argumentos de linea de comandos (no utilizados).
      */
     public static void main(String[] args) {
         Distribuidor distribuidor = Distribuidor.getInstance();

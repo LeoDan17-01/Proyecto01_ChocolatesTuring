@@ -1,11 +1,11 @@
 /**
- * Estado en el que se realiza la verificación técnica de la computadora.
- * Comprueba compatibilidad, requisitos mínimos y balance del sistema.
+ * Estado en el que se realiza la verificacion tecnica de la computadora.
+ * Comprueba compatibilidad, requisitos minimos y balance del sistema.
  */
 public class EstadoVerificacion implements EstadoEnvio {
 
     /**
-     * Procesa el pedido realizando las verificaciones técnicas.
+     * Procesa el pedido realizando las verificaciones tecnicas.
      *
      * @param pedido Pedido a verificar.
      */
@@ -37,7 +37,7 @@ public class EstadoVerificacion implements EstadoEnvio {
     }
 
     /**
-     * Devuelve la descripción textual de este estado.
+     * Devuelve la descripcion textual de este estado.
      *
      * @return una cadena que representa este estado.
      */
@@ -83,7 +83,7 @@ public class EstadoVerificacion implements EstadoEnvio {
     }
     
     /**
-     * Verifica que la computadora cumpla con los requisitos mínimos operativos.
+     * Verifica que la computadora cumpla con los requisitos minimos operativos.
      * 
      * @param comp Computadora a verificar.
      */

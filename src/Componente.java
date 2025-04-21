@@ -1,5 +1,5 @@
 /**
- * Clase abstracta que representa un componente genérico de una computadora.
+ * Clase abstracta que representa un componente generico de una computadora.
  */
 public abstract class Componente {
     protected String nombre;
@@ -42,9 +42,9 @@ public abstract class Componente {
 
 
     /**
-     * Retorna una descripción detallada del componente.
+     * Retorna una descripcion detallada del componente.
      *
-     * @return Descripción como cadena.
+     * @return Descripcion como cadena.
      */
     public abstract String getDescripcion();
 }

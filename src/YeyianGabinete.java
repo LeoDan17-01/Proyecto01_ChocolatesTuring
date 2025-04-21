@@ -1,21 +1,27 @@
+/**
+ * Representa un gabinete de la marca Yeyian.
+ * 
+ * Hereda de la clase base Gabinete y proporciona una descripcion especifica
+ * que incluye el factor de forma y si incluye ventiladores.
+ */
 public class YeyianGabinete extends Gabinete {
 
     /**
-     * Crea un nuevo gabinete NZXT con sus especificaciones.
+     * Crea una nueva instancia de un gabinete Yeyian con las caracteristicas proporcionadas.
      *
-     * @param nombre              Nombre del modelo.
-     * @param precio              Precio del gabinete.
-     * @param tipoFactor          Tipo de factor de forma (ATX, mATX...).
-     * @param incluyeVentiladores Indica si incluye ventiladores de fábrica.
+     * @param nombre              Nombre del modelo del gabinete.
+     * @param precio              Precio del gabinete en moneda local.
+     * @param tipoFactor          Tipo de factor de forma (ej. ATX, MicroATX).
+     * @param incluyeVentiladores true si incluye ventiladores, false si no.
      */
     public YeyianGabinete(String nombre, double precio, String tipoFactor, boolean incluyeVentiladores) {
         super(nombre, precio, "Yeyian", tipoFactor, incluyeVentiladores);
     }
 
     /**
-     * Devuelve una descripción completa del gabinete.
+     * Retorna una descripcion detallada del gabinete Yeyian.
      *
-     * @return Descripción textual con detalles del modelo.
+     * @return Cadena con nombre, factor de forma, ventiladores incluidos y precio.
      */
     @Override
     public String getDescripcion() {

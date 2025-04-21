@@ -1,5 +1,5 @@
 /**
- * Clase abstracta que representa un módulo de memoria RAM.
+ * Clase abstracta que representa un modulo de memoria RAM.
  */
 public abstract class RAM {
     protected String nombre;
@@ -13,11 +13,11 @@ public abstract class RAM {
      * Constructor de RAM.
      *
      * @param nombre         Nombre del modelo.
-     * @param precio         Precio del módulo.
+     * @param precio         Precio del modulo.
      * @param marca          Marca.
      * @param capacidadGB    Capacidad en gigabytes.
      * @param tipoMemoria    Tipo (ej. DDR4, DDR5).
-     * @param velocidadMHz   Velocidad de operación en MHz.
+     * @param velocidadMHz   Velocidad de operacion en MHz.
      */
     public RAM(String nombre, double precio, String marca, int capacidadGB, String tipoMemoria, int velocidadMHz) {
         this.nombre = nombre;
@@ -31,14 +31,14 @@ public abstract class RAM {
     /**
      * Devuelve el nombre del modelo de la memoria RAM.
      *
-     * @return nombre del módulo RAM (ej. "ADATA 16GB").
+     * @return nombre del modulo RAM (ej. "ADATA 16GB").
      */
     public String getNombre() { return nombre; }
 
     /**
      * Obtiene el precio de la memoria RAM.
      *
-     * @return precio del módulo en moneda local.
+     * @return precio del modulo en moneda local.
      */
     public double getPrecio() { return precio; }
 
@@ -66,14 +66,14 @@ public abstract class RAM {
     /**
      * Devuelve la velocidad de la memoria en MHz.
      *
-     * @return velocidad del módulo en megahercios.
+     * @return velocidad del modulo en megahercios.
      */
     public int getVelocidadMHz() { return velocidadMHz; }
 
     /**
-     * Devuelve una descripción detallada del módulo RAM.
+     * Devuelve una descripcion detallada del modulo RAM.
      *
-     * @return Descripción textual.
+     * @return Descripcion textual.
      */
     public abstract String getDescripcion();
 }

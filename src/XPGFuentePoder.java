@@ -1,21 +1,26 @@
+/**
+ * Representa una fuente de poder de la marca XPG.
+ * 
+ * Extiende la clase base FuentePoder y define una descripcion especifica para esta marca.
+ */
 public class XPGFuentePoder extends FuentePoder {
 
     /**
-     * Constructor de fuente de poder EVGA.
+     * Constructor que inicializa una fuente de poder XPG con sus características.
      *
-     * @param nombre        Nombre del modelo.
+     * @param nombre        Nombre del modelo de la fuente.
      * @param precio        Precio en moneda local.
-     * @param potenciaWatts Potencia en vatios.
-     * @param certificacion Certificación de eficiencia (ej. 80+ Bronze).
+     * @param potenciaWatts Potencia maxima en vatios que entrega la fuente.
+     * @param certificacion Certificacion de eficiencia energetica (por ejemplo, 80+ Bronze).
      */
     public XPGFuentePoder(String nombre, double precio, int potenciaWatts, String certificacion) {
         super(nombre, precio, "XPG", potenciaWatts, certificacion);
     }
 
     /**
-     * Devuelve una descripción detallada de la fuente EVGA.
+     * Retorna una descripcion formateada de la fuente de poder XPG.
      *
-     * @return descripción en texto plano.
+     * @return Cadena con nombre, potencia, certificacion y precio.
      */
     @Override
     public String getDescripcion() {

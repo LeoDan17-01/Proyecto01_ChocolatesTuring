@@ -9,16 +9,16 @@ public class EVGAFuentePoder extends FuentePoder {
      * @param nombre        Nombre del modelo.
      * @param precio        Precio en moneda local.
      * @param potenciaWatts Potencia en vatios.
-     * @param certificacion Certificación de eficiencia (ej. 80+ Bronze).
+     * @param certificacion Certificacion de eficiencia (ej. 80+ Bronze).
      */
     public EVGAFuentePoder(String nombre, double precio, int potenciaWatts, String certificacion) {
         super(nombre, precio, "EVGA", potenciaWatts, certificacion);
     }
 
     /**
-     * Devuelve una descripción detallada de la fuente EVGA.
+     * Devuelve una descripcion detallada de la fuente EVGA.
      *
-     * @return descripción en texto plano.
+     * @return descripcion en texto plano.
      */
     @Override
     public String getDescripcion() {

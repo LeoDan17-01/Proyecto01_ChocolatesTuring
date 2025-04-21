@@ -8,7 +8,7 @@ public class EstadoSeleccionComponentes implements EnsamblajeEstado {
     private static final Scanner scanner = new Scanner(System.in);
 
     /**
-     * Muestra el menú de selección de componentes y permite al usuario configurar su computadora.
+     * Muestra el menu de seleccion de componentes y permite al usuario configurar su computadora.
      *
      * @param context Contexto actual del ensamblaje.
      */
@@ -54,9 +54,9 @@ public class EstadoSeleccionComponentes implements EnsamblajeEstado {
     }
 
     /**
-     * Devuelve una descripción textual de este estado.
+     * Devuelve una descripcion textual de este estado.
      *
-     * @return Descripción del estado.
+     * @return Descripcion del estado.
      */
     @Override
     public String getDescripcion() {
@@ -64,11 +64,11 @@ public class EstadoSeleccionComponentes implements EnsamblajeEstado {
     }
 
     /**
-     * Muestra en consola el menú de opciones para que el usuario seleccione
+     * Muestra en consola el menu de opciones para que el usuario seleccione
      * los componentes de la computadora de forma personalizada.
      *
      * Las opciones incluyen CPU, RAM, GPU, disco, fuente, motherboard, gabinete,
-     * y la posibilidad de finalizar la selección.
+     * y la posibilidad de finalizar la seleccion.
      */
     private void mostrarMenu() {
         System.out.println("\n1. Agregar CPU");
@@ -83,9 +83,9 @@ public class EstadoSeleccionComponentes implements EnsamblajeEstado {
     }
 
     /**
-     * Lee una opción numérica válida desde consola.
+     * Lee una opcion numerica valida desde consola.
      *
-     * @return La opción seleccionada por el usuario.
+     * @return La opcion seleccionada por el usuario.
      */
     private int obtenerOpcionUsuario() {
         while (!scanner.hasNextInt()) {
@@ -148,7 +148,7 @@ public class EstadoSeleccionComponentes implements EnsamblajeEstado {
     }
 
     /**
-     * Permite al usuario seleccionar una tarjeta gráfica (GPU) entre opciones predeterminadas.
+     * Permite al usuario seleccionar una tarjeta grafica (GPU) entre opciones predeterminadas.
      * La GPU seleccionada se agrega al ensamblaje.
      *
      * @param context Contexto del ensamblaje actual.
@@ -214,7 +214,7 @@ public class EstadoSeleccionComponentes implements EnsamblajeEstado {
 
     /**
      * Permite al usuario seleccionar una fuente de poder y la agrega al ensamblaje.
-     * Ofrece opciones con distinta potencia y certificación.
+     * Ofrece opciones con distinta potencia y certificacion.
      *
      * @param context Contexto del ensamblaje actual.
      */

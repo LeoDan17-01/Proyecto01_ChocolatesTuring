@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Builder para la construcción paso a paso de una Computadora.
+ * Builder para la construccion paso a paso de una Computadora.
  */
 public class ComputadoraBuilder {
     private Computadora computadora;
@@ -10,7 +10,7 @@ public class ComputadoraBuilder {
     private List<Disco> discos = new ArrayList<>();
 
     /**
-     * Constructor que inicializa una computadora vacía con listas por defecto.
+     * Constructor que inicializa una computadora vacia con listas por defecto.
      */
     public ComputadoraBuilder() {
         this.computadora = new Computadora(null, null, null, null, null, null, null);
@@ -50,7 +50,7 @@ public class ComputadoraBuilder {
     }
 
     /**
-     * Agrega una tarjeta gráfica a la computadora.
+     * Agrega una tarjeta grafica a la computadora.
      *
      * @param gpu GPU a agregar.
      * @return Instancia del builder.

@@ -1,6 +1,6 @@
 /**
  * Clase abstracta que representa una fuente de poder para computadora.
- * Incluye atributos comunes como potencia, certificación y marca.
+ * Incluye atributos comunes como potencia, certificacion y marca.
  */
 public abstract class FuentePoder {
     protected String nombre;
@@ -16,7 +16,7 @@ public abstract class FuentePoder {
      * @param precio         Precio de la fuente.
      * @param marca          Marca del fabricante.
      * @param potenciaWatts  Potencia nominal en watts.
-     * @param certificacion  Certificación de eficiencia energética (ej. 80+ Bronze).
+     * @param certificacion  Certificacion de eficiencia energetica (ej. 80+ Bronze).
      */
     public FuentePoder(String nombre, double precio, String marca, int potenciaWatts, String certificacion) {
         this.nombre = nombre;
@@ -55,16 +55,16 @@ public abstract class FuentePoder {
     public int getPotenciaWatts() { return potenciaWatts; }
 
     /**
-     * Devuelve la certificación de eficiencia energética.
+     * Devuelve la certificacion de eficiencia energetica.
      *
-     * @return tipo de certificación (por ejemplo, "80+ Bronze", "80+ Gold").
+     * @return tipo de certificacion (por ejemplo, "80+ Bronze", "80+ Gold").
      */
     public String getCertificacion() { return certificacion; }
 
     /**
-     * Método abstracto para retornar una descripción completa.
+     * Metodo abstracto para retornar una descripcion completa.
      *
-     * @return Cadena con la descripción.
+     * @return Cadena con la descripcion.
      */
     public abstract String getDescripcion();
 }

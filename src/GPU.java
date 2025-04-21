@@ -1,6 +1,6 @@
 
 /**
- * Clase abstracta que representa una tarjeta gráfica (GPU).
+ * Clase abstracta que representa una tarjeta grafica (GPU).
  * Incluye especificaciones como tipo de memoria y VRAM.
  */
 public abstract class GPU extends Componente {

@@ -54,15 +54,16 @@ public abstract class Disco {
     public int getCapacidadGB() { return capacidadGB; }
 
     /**
-     * Obtiene el tipo de tecnología de almacenamiento utilizada.
+     * Obtiene el tipo de tecnologia de almacenamiento utilizada.
      *
      * @return el tipo de almacenamiento (por ejemplo, "SATA", "NVMe").
      */
     public String getTipoAlmacenamiento() { return tipoAlmacenamiento; }
 
     /**
-     * Devuelve una descripción del disco.
-     * @return descripción completa.
+     * Devuelve una descripcion del disco.
+     * 
+     * @return descripcion completa.
      */
     public abstract String getDescripcion();
 }

@@ -1,10 +1,10 @@
 /**
- * Interfaz que define los métodos necesarios para verificar
+ * Interfaz que define los metodos necesarios para verificar
  * y adaptar la compatibilidad entre componentes.
  */
 public interface Compatibilidad {
     /**
-     * Verifica si dos componentes son compatibles entre sí.
+     * Verifica si dos componentes son compatibles entre si.
      *
      * @param componente1 Primer componente.
      * @param componente2 Segundo componente.
@@ -16,7 +16,7 @@ public interface Compatibilidad {
      * Adapta un componente a una forma compatible.
      *
      * @param componente Componente original.
-     * @return Componente adaptado o el mismo si no se requiere adaptación.
+     * @return Componente adaptado o el mismo si no se requiere adaptacion.
      */
     Componente adaptarComponente(Componente componente);
 }

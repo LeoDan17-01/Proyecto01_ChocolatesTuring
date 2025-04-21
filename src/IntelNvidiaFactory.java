@@ -90,6 +90,8 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public Disco crearDisco(String modelo) {
         switch (modelo) {
+            case "500GB": // <-- CASO NUEVO AÑADIDO PARA EL PREARMADO
+                return new SSD("Samsung 500GB", 60, "Samsung", 500, "NVMe");
             case "500GB-WDB":
                 return new WDBlueHDD("Western Digital Blue 500GB", 700, "Samsung", 500, "NVMe");
             case "1TB-WDB":
@@ -120,6 +122,8 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public FuentePoder crearFuentePoder(String modelo) {
         switch (modelo) {
+            case "600W": // <-- CASO NUEVO AÑADIDO PARA EL PREARMADO
+                return new EVGAFuentePoder("EVGA 600W", 50, 600, "80+ Bronze");
             case "800W":
                 return new EVGAFuentePoder("EVGA 800W", 1000, 800, "80+ Bronze");
             case "1000W":
@@ -153,6 +157,8 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public Motherboard crearMotherboard(String modelo) {
         switch (modelo) {
+            case "Z590": // <-- CASO NUEVO AÑADIDO PARA EL PREARMADO
+                return new ASUSMotherboard("ASUS Z590", 250, "Z590", "LGA1200");
             case "Z790":
                 return new ASUSMotherboard("ASUS ROG Maximus Z790 Hero", 5000, "Z790", "LGA1200");
             case "B760":
@@ -175,6 +181,8 @@ public class IntelNvidiaFactory implements ComponenteFactory {
     @Override
     public Gabinete crearGabinete(String modelo) {
         switch (modelo) {
+            case "NZXT H510": // <-- CASO NUEVO AÑADIDO PARA EL PREARMADO
+                return new NZXTGabinete("NZXT H510", 70, "ATX", true);
             case "NZXT":
                 return new NZXTGabinete("NZXT H6 Flow ATX", 2000, "ATX", true);
             case "Yeyian":
